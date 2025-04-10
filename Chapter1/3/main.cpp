@@ -1,6 +1,8 @@
 #include<DxLib.h>
 #include<cassert>
 #include<cmath>
+
+
 int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int){
 	ChangeWindowMode(true);
 	if(DxLib_Init()==-1){
@@ -61,7 +63,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int){
 		bgPosX -= vx;//背景を速度の逆方向にスクロール
 		bgPosX = bgPosX % 480;//背景は480ピクセルごとに繰り返す
 		pipePosX -= vx;//背景を速度の逆方向にスクロール
-		pipePosX = pipePosX % (int)((32+8) * background_scale);//背景は480ピクセルごとに繰り返す
+		pipePosX = pipePosX % (int)((32+8) * background_scale);//
 		auto waitTime=GetTickCount64() - lastTime;
 		if(waitTime<flip_interval){//16ミリ秒経ってなかったら16ミリ秒になるまで待つ
 			Sleep((unsigned int)waitTime);
