@@ -61,6 +61,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int){
 		auto currentMouseState = GetMouseInput();
 
 		if (isDead) {
+			
 			if (CheckHitKey(KEY_INPUT_R)) {
 				isDead = false;
 				x = 320.0f;//自機のX座標
@@ -141,10 +142,12 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int){
 		}
 		float angle = atan2f(vy, vx);//速度ベクトルを角度に変換
 		DrawRectRotaGraphF(320.0f, y,0,0,16,16,3.0f,angle, playerH, true);
-
+		if(isDead){
+			DrawString(200, 240, L"Game over press R!! for continue ", GetColor(255, 0, 0));
+		}
 		auto waitTime=GetTickCount64() - lastTime;
 		if(waitTime<flip_interval){//16ミリ秒経ってなかったら16ミリ秒になるまで待つ
-			Sleep((unsigned int)waitTime);
+			Sleep((unsigned int)(flip_interval-waitTime));
 		}
 		ScreenFlip();
 	}
