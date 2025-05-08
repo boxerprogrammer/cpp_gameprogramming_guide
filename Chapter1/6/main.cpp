@@ -167,6 +167,8 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int){
 	int playerH = LoadGraph(L"../img/bird.png");
 	int backH = LoadGraph(L"../img/Background2.png");//背景のロード
 	int pipeH = LoadGraph(L"../img/PipeStyle1.png");//パイプのロード
+	int jumpSE = LoadSoundMem(L"../sound/jump.wav");
+
 
 	float x = 320.0f;//自機のX座標
 	float y = 240.0f;//自機のY座標
@@ -213,6 +215,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int){
 		ySpaceCenter += (GetRand(40) - 20)*2;//パイプの上下の間隔
 	}
 	int highScore = 0;//ハイスコア
+	PlayMusic(L"../sound/bgm.mp3", DX_PLAYTYPE_LOOP);
 	while(ProcessMessage()!=-1){
 		ClearDrawScreen();
 
@@ -255,6 +258,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int){
 		if (!isDead) {
 			if (!(lastMouseSate & MOUSE_INPUT_LEFT) && (currentMouseState && MOUSE_INPUT_LEFT)) {
 				vy = jump_velocity;
+				PlaySoundMem(jumpSE, DX_PLAYTYPE_BACK);
 			}
 			vy += g;
 			y += vy;
