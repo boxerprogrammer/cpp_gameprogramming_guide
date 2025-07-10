@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f595f7ae-4dd4-42d9-a3a4-eee317266d18}</ProjectGuid>
+    <ProjectGuid>{6A5218D6-F4D8-4C86-8CD0-25732822FC4B}</ProjectGuid>
     <RootNamespace>BulletHell</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -132,6 +132,16 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="DrawUtil.cpp" />
+    <ClCompile Include="Game\Actor.cpp" />
+    <ClCompile Include="Game\Ball.cpp" />
+    <ClCompile Include="Game\CircleCollider.cpp" />
+    <ClCompile Include="Game\Collider.cpp" />
+    <ClCompile Include="Game\CollisionManager.cpp" />
+    <ClCompile Include="Game\Enemy.cpp" />
+    <ClCompile Include="Game\Geometry.cpp" />
+    <ClCompile Include="Game\Item.cpp" />
+    <ClCompile Include="Game\Player.cpp" />
+    <ClCompile Include="Game\Rock.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\CommandListScene.cpp" />
@@ -148,6 +158,16 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="DrawUtil.h" />
+    <ClInclude Include="Game\Actor.h" />
+    <ClInclude Include="Game\Ball.h" />
+    <ClInclude Include="Game\CircleCollider.h" />
+    <ClInclude Include="Game\Collider.h" />
+    <ClInclude Include="Game\CollisionManager.h" />
+    <ClInclude Include="Game\Enemy.h" />
+    <ClInclude Include="Game\Geometry.h" />
+    <ClInclude Include="Game\Item.h" />
+    <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Game\Rock.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Scene\CommandListScene.h" />
     <ClInclude Include="Scene\GameScene.h" />

@@ -16,6 +16,9 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{734f6a2c-a7cd-4f24-a417-68bcd1fb0a64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{b1f38413-6992-4e5f-84f9-078777d32cbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -28,9 +31,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="DrawUtil.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Scene\CommandListScene.cpp">
@@ -60,6 +60,39 @@
     <ClCompile Include="Scene\TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Actor.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Ball.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\CircleCollider.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Collider.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\CollisionManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemy.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Geometry.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Item.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Rock.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Input.h">
@@ -72,9 +105,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="DrawUtil.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\OverScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Scene\GameScene.h">
@@ -99,6 +129,39 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Geometry.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Rock.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Actor.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Ball.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\CircleCollider.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Collider.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\CollisionManager.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemy.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Item.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\OverScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
