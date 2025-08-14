@@ -5,12 +5,13 @@
 
 void
 Rect::Draw() {
-	DxLib::DrawBox(Left()*2, Top()*2, Right()*2, Bottom()*2, 0xffffffff, false);
+	DxLib::DrawBoxAA(
+		Left()*2.0f, Top()*2.0f, Right()*2.0f, Bottom()*2.0f, 0xffffffff, false);
 }
 
 void
 Rect::Draw(Vector2& offset) {
-	DxLib::DrawBox((Left()+offset.x)*2, (Top()+offset.y)*2, (Right()+offset.x)*2, (Bottom()+offset.y)*2, 0xffffffff, false);
+	DxLib::DrawBoxAA((Left()+offset.x)*2.0f, (Top()+offset.y)*2.0f, (Right()+offset.x)*2.0f, (Bottom()+offset.y)*2.0f, 0xffffffff, false);
 }
 
 void

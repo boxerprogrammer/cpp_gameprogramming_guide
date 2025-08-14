@@ -78,7 +78,7 @@ void KeyConfigScene::DrawInputList()
 	for (const auto& menuName : systemMenuStringList_) {
 		uint32_t texCol = normal_text_color;
 		int colX = input_list_left + 100;
-		int idx = currentIndex_ - input_.inputListForDisplay_.size();
+		int idx = static_cast<int>(currentIndex_ - input_.inputListForDisplay_.size());
 		if (idx >= 0) {
 			if (systemMenuStringList_[idx]==menuName) {
 				DrawString(input_list_left - indicator_offset + 100 + 1, rowY + 1, L"⇒", 0x000000);
@@ -112,8 +112,8 @@ KeyConfigScene::GetPeriphString(const PeripheralType& type)
 
 void KeyConfigScene::NormalUpdate(Input& input)
 {
-	const auto keyEventSize = input.inputListForDisplay_.size();
-	const auto inputRowSize = keyEventSize + systemMenuStringList_.size();//システムメニューを足す
+	const auto keyEventSize = static_cast<int>(input.inputListForDisplay_.size());
+	const auto inputRowSize = static_cast<int>(keyEventSize + systemMenuStringList_.size());//システムメニューを足す
 	if (input.IsTriggered("ok")) {
 		if (currentIndex_ < keyEventSize) {
 			GetHitKeyStateAll(lastKeyState_.data());
@@ -327,8 +327,9 @@ void KeyConfigScene::Draw()
 		0xaaffaa, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	//緑
-	DrawBoxAA(margin_size, margin_size,
-		wsize.width - margin_size, wsize.height - margin_size,
+	DrawBoxAA(
+		static_cast<float>(margin_size), static_cast<float>(margin_size),
+		static_cast<float>(wsize.width - margin_size),static_cast<float>(wsize.height - margin_size),
 		0x00ff00, false, 3.0f);
 	DrawString(margin_size + 10, margin_size + 10, L"キーコンフィグ", 0x000000);
 	

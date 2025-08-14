@@ -80,7 +80,7 @@ void GameScene::NormalDraw()
 	DrawRotaGraph(320, 240, 1.0f, 0.0f, bgH_, true);
 	DrawString(10, 10, L"Game Scene", 0xffffff);
 	SetDrawScreen(DX_SCREEN_BACK);
-	int x = ((yureFrame_ % 3) * 20-10)*yureRate_;
+	int x = static_cast<int>(((yureFrame_ % 3) * 20-10)*yureRate_);
 	ClearDrawScreen();
 	if (yureFrame_ == 0) {
 		x = 0;
@@ -96,7 +96,7 @@ void GameScene::FadeDraw()
 	DrawRotaGraph(320, 240, 1.0f, 0.0f, bgH_, true);
 	float rate = static_cast<float>(frame_) /
 					static_cast<float>(fade_interval);
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, rate * 255);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(rate * 255.0f));
 	DrawBox(0, 0, 640, 480, 0x000000,true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }

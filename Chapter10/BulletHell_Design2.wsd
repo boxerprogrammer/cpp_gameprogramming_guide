@@ -1,0 +1,503 @@
+@startuml
+!theme blueprint
+title 東方Project風弾幕ゲーム クラス図
+
+' システム管理クラス
+package "Core System" {
+    class GameManager <<singleton>> {
+        - instance : GameManager*
+        - sceneManager : SceneManager*
+        - resourceManager : ResourceManager*
+        - inputManager : InputManager*
+        - soundManager : SoundManager*
+        - highScore : int
+        - currentScore : int
+        - GameManager()
+        + getInstance() : GameManager*
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + finalize() : void
+        + getHighScore() : int
+        + getCurrentScore() : int
+        + addScore(points : int) : void
+        + getSceneManager() : SceneManager*
+        + getResourceManager() : ResourceManager*
+        + getInputManager() : InputManager*
+        + getSoundManager() : SoundManager*
+    }
+
+    class SceneManager {
+        - sceneStack : stack<Scene*>
+        - nextScene : Scene*
+        - isTransitioning : bool
+        - transitionEffect : TransitionEffect*
+        + SceneManager()
+        + ~SceneManager()
+        + update() : void
+        + draw() : void
+        + pushScene(scene : Scene*) : void
+        + popScene() : void
+        + changeScene(scene : Scene*) : void
+        + startTransition(nextScene : Scene*, effect : TransitionEffect*) : void
+        + isInTransition() : bool
+    }
+
+    class InputManager {
+        - keyBindings : unordered_map<string, int>
+        - keyStates : char[256]
+        - prevKeyStates : char[256]
+        + InputManager()
+        + update() : void
+        + isKeyPressed(action : string) : bool
+        + isKeyJustPressed(action : string) : bool
+        + isKeyReleased(action : string) : bool
+        + setKeyBinding(action : string, keyCode : int) : void
+        + getKeyBinding(action : string) : int
+        + loadKeyConfig() : void
+        + saveKeyConfig() : void
+    }
+
+    class ResourceManager {
+        - images : unordered_map<string, int>
+        - sounds : unordered_map<string, int>
+        + ResourceManager()
+        + ~ResourceManager()
+        + initialize() : void
+        + finalize() : void
+        + loadImage(path : string, key : string) : int
+        + getImage(key : string) : int
+        + loadSound(path : string, key : string) : int
+        + getSound(key : string) : int
+    }
+
+    class SoundManager {
+        - bgmVolume : float
+        - seVolume : float
+        - currentBGM : int
+        + SoundManager()
+        + playBGM(handle : int) : void
+        + stopBGM() : void
+        + playSE(handle : int) : void
+        + setBGMVolume(volume : float) : void
+        + setSEVolume(volume : float) : void
+        + getBGMVolume() : float
+        + getSEVolume() : float
+        + loadSettings() : void
+        + saveSettings() : void
+    }
+}
+
+' シーン管理
+package "Scene Management" {
+    abstract class Scene {
+        # gameObjects : vector<GameObject*>
+        + Scene()
+        + ~Scene()
+        + {abstract} initialize() : void
+        + {abstract} update() : void
+        + {abstract} draw() : void
+        + {abstract} finalize() : void
+        + addGameObject(obj : GameObject*) : void
+        + removeGameObject(obj : GameObject*) : void
+    }
+
+    class TitleScene {
+        - logoHandle : int
+        - bgHandle : int
+        + TitleScene()
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + finalize() : void
+    }
+
+    class CharacterSelectScene {
+        - characters : vector<PlayerCharacter>
+        - selectedIndex : int
+        + CharacterSelectScene()
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + finalize() : void
+        + getSelectedCharacter() : PlayerCharacter
+    }
+
+    class GamePlayScene {
+        - player : Player*
+        - stageManager : StageManager*
+        - uiManager : UIManager*
+        - collisionManager : CollisionManager*
+        + GamePlayScene(selectedCharacter : PlayerCharacter)
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + finalize() : void
+        + checkCollisions() : void
+        + checkGameOver() : void
+        + checkStageClear() : void
+    }
+
+    class PauseScene {
+        - parentScene : Scene*
+        + PauseScene(parentScene : Scene*)
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + finalize() : void
+        + resumeGame() : void
+        + returnToTitle() : void
+    }
+
+    class OptionScene {
+        - parentScene : Scene*
+        + OptionScene(parentScene : Scene*)
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + finalize() : void
+        + applySettings() : void
+        + returnToPrevious() : void
+    }
+
+    class GameOverScene {
+        - score : int
+        + GameOverScene(score : int)
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + finalize() : void
+        + continue() : void
+        + returnToTitle() : void
+    }
+}
+
+' ゲームオブジェクト
+package "Game Objects" {
+    abstract class GameObject {
+        # position : Vector2
+        # isActive : bool
+        # components : vector<Component*>
+        + GameObject()
+        + ~GameObject()
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + setPosition(pos : Vector2) : void
+        + getPosition() : Vector2
+        + setActive(active : bool) : void
+        + getActive() : bool
+        + addComponent(component : Component*) : void
+        + getComponent<T>() : T*
+    }
+
+    abstract class Component {
+        # owner : GameObject*
+        + Component(owner : GameObject*)
+        + ~Component()
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + getOwner() : GameObject*
+    }
+
+    class ColliderComponent {
+        - type : ColliderType
+        - size : Vector2
+        - radius : float
+        + ColliderComponent(owner : GameObject*)
+        + setRectSize(size : Vector2) : void
+        + setRadius(radius : float) : void
+        + setType(type : ColliderType) : void
+        + checkCollision(other : ColliderComponent*) : bool
+    }
+
+    class Player {
+        - lives : int
+        - bombs : int
+        - power : float
+        - isSlowMode : bool
+        + Player()
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + shoot() : void
+        + useBomb() : void
+        + toggleSlowMode() : void
+        + damage() : void
+        + addPower(amount : float) : void
+        + getLives() : int
+        + getBombs() : int
+        + getPower() : float
+    }
+
+    class PlayerShot {
+        - speed : float
+        - power : int
+        - type : ShotType
+        + PlayerShot(type : ShotType, power : int)
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + getPower() : int
+    }
+
+    class Enemy {
+        - hp : int
+        - maxHp : int
+        - speed : float
+        - type : EnemyType
+        - bulletPatterns : vector<BulletPattern*>
+        + Enemy(type : EnemyType)
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + damage(amount : int) : void
+        + isDead() : bool
+        + addBulletPattern(pattern : BulletPattern*) : void
+        + fireBullets() : void
+        + getHp() : int
+        + getMaxHp() : int
+    }
+
+    class Boss {
+        - phases : vector<BossPhase*>
+        - currentPhase : int
+        - phaseTimer : float
+        + Boss()
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + startNextPhase() : void
+        + updatePhase() : void
+        + showEntryEffect() : void
+    }
+
+    class Bullet {
+        - type : BulletType
+        - speed : float
+        - angle : float
+        - movement : BulletMovement
+        + Bullet(type : BulletType)
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + setMovement(movement : BulletMovement) : void
+        + setSpeed(speed : float) : void
+        + setAngle(angle : float) : void
+    }
+
+    class Laser {
+        - length : float
+        - width : float
+        - angle : float
+        - chargeTime : float
+        - isCharging : bool
+        + Laser()
+        + initialize() : void
+        + update() : void
+        + draw() : void
+        + startCharging() : void
+        + fire() : void
+    }
+}
+
+' 弾幕パターン
+package "Bullet Patterns" {
+    abstract class BulletPattern {
+        # interval : float
+        # timer : float
+        + BulletPattern(interval : float)
+        + ~BulletPattern()
+        + {abstract} update(owner : Enemy*) : void
+        + {abstract} spawnBullets(owner : Enemy*) : void
+    }
+
+    class CircularPattern {
+        - bulletCount : int
+        - spreadAngle : float
+        + CircularPattern(interval : float, bulletCount : int)
+        + update(owner : Enemy*) : void
+        + spawnBullets(owner : Enemy*) : void
+    }
+
+    class SpiralPattern {
+        - bulletCount : int
+        - rotationSpeed : float
+        - currentAngle : float
+        + SpiralPattern(interval : float, bulletCount : int, rotationSpeed : float)
+        + update(owner : Enemy*) : void
+        + spawnBullets(owner : Enemy*) : void
+    }
+
+    class AimPattern {
+        - bulletCount : int
+        - spreadAngle : float
+        + AimPattern(interval : float, bulletCount : int, spreadAngle : float)
+        + update(owner : Enemy*) : void
+        + spawnBullets(owner : Enemy*) : void
+    }
+}
+
+' ゲーム管理
+package "Game Management" {
+    class StageManager {
+        - currentStage : int
+        - stageTimer : float
+        - stageData : vector<StageData>
+        + StageManager()
+        + initialize() : void
+        + update() : void
+        + loadStageData(stageNumber : int) : void
+        + spawnEnemies() : void
+        + isStageClear() : bool
+        + moveToNextStage() : void
+    }
+
+    class UIManager {
+        - player : Player*
+        + UIManager(player : Player*)
+        + draw() : void
+        + drawPlayerInfo() : void
+        + drawScore() : void
+        + drawBossHP(boss : Boss*) : void
+    }
+
+    class CollisionManager {
+        - playerObjects : vector<GameObject*>
+        - enemyObjects : vector<GameObject*>
+        - playerBullets : vector<GameObject*>
+        - enemyBullets : vector<GameObject*>
+        + CollisionManager()
+        + update() : void
+        + checkPlayerEnemyCollisions() : void
+        + checkPlayerEnemyBulletCollisions() : void
+        + checkEnemyPlayerBulletCollisions() : void
+        + registerPlayerObject(obj : GameObject*) : void
+        + registerEnemyObject(obj : GameObject*) : void
+        + registerPlayerBullet(obj : GameObject*) : void
+        + registerEnemyBullet(obj : GameObject*) : void
+        + clear() : void
+    }
+}
+
+' エフェクト
+package "Effects" {
+    abstract class TransitionEffect {
+        # duration : float
+        # timer : float
+        # isDone : bool
+        + TransitionEffect(duration : float)
+        + ~TransitionEffect()
+        + update() : void
+        + {abstract} draw() : void
+        + getIsDone() : bool
+        + reset() : void
+    }
+
+    class FadeEffect {
+        - fadeType : FadeType
+        - alpha : float
+        + FadeEffect(duration : float, fadeType : FadeType)
+        + draw() : void
+    }
+
+    class WipeEffect {
+        - direction : WipeDirection
+        - progress : float
+        + WipeEffect(duration : float, direction : WipeDirection)
+        + draw() : void
+    }
+}
+
+' ユーティリティ
+package "Utilities" {
+    class Vector2 {
+        + x : float
+        + y : float
+        + Vector2(x : float, y : float)
+        + operator+(other : Vector2) : Vector2
+        + operator-(other : Vector2) : Vector2
+        + operator*(scalar : float) : Vector2
+        + length() : float
+        + normalized() : Vector2
+        + dot(other : Vector2) : float
+        + cross(other : Vector2) : float
+    }
+
+    enum ColliderType {
+        CIRCLE
+        RECTANGLE
+    }
+
+    enum ShotType {
+        NORMAL
+        SPREAD
+        LASER
+    }
+
+    enum EnemyType {
+        SMALL
+        MEDIUM
+        LARGE
+        BOSS
+    }
+
+    enum BulletType {
+        NORMAL
+        LARGE
+        ENERGY
+        LASER
+    }
+
+    enum PlayerCharacter {
+        REIMU
+        MARISA
+        SAKUYA
+    }
+}
+
+' 関係性
+GameManager --> SceneManager
+GameManager --> ResourceManager
+GameManager --> InputManager
+GameManager --> SoundManager
+
+SceneManager --> Scene
+SceneManager --> TransitionEffect
+
+Scene <|-- TitleScene
+Scene <|-- CharacterSelectScene
+Scene <|-- GamePlayScene
+Scene <|-- PauseScene
+Scene <|-- OptionScene
+Scene <|-- GameOverScene
+
+GameObject <|-- Player
+GameObject <|-- PlayerShot
+GameObject <|-- Enemy
+GameObject <|-- Bullet
+GameObject <|-- Laser
+
+Enemy <|-- Boss
+
+Component <|-- ColliderComponent
+GameObject --> Component
+
+GamePlayScene --> Player
+GamePlayScene --> StageManager
+GamePlayScene --> UIManager
+GamePlayScene --> CollisionManager
+
+Enemy --> BulletPattern
+BulletPattern <|-- CircularPattern
+BulletPattern <|-- SpiralPattern
+BulletPattern <|-- AimPattern
+
+TransitionEffect <|-- FadeEffect
+TransitionEffect <|-- WipeEffect
+
+UIManager --> Player
+CollisionManager --> GameObject
+
+@enduml

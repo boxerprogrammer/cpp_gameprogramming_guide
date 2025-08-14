@@ -4,7 +4,6 @@ skinparam classAttributeIconSize 0
 '== シーン管理 ==
 abstract class Scene
 class TitleScene
-class CharacterSelectScene
 class GamePlayScene
 class PauseScene
 class OptionScene
@@ -12,60 +11,50 @@ class GameOverScene
 class StageClearScene
 class ContinueScene
 class SceneManager
+class Application
+
+Application -->SceneManager
+
 
 Scene <|-- TitleScene
-Scene <|-- CharacterSelectScene 
 GamePlayScene --|> Scene
 Scene <|-- PauseScene
+Scene <|-- KeyConfigScene
 Scene <|-- OptionScene
-Scene <|- GameOverScene
+Scene <|-- GameOverScene
 Scene <|-- StageClearScene
 ContinueScene -|> Scene
-SceneManager --> Scene : manages *
+Scene -> Input
+SceneManager --> Scene : manager *
 
 '== ゲームオブジェクト ==
-abstract class GameObject
+abstract class Actor
 class Player
 class Enemy
-class BossEnemy
+class Boss
 class Shot
-class EnemyBullet
+class Bullet
 class Laser
 class Item
 
-GameObject <|-- Player
-GameObject <|-- Enemy
-Enemy <|-- BossEnemy
+Actor <|-- Player
+Actor <|-- Enemy
+Enemy <|-- Boss
 Enemy <|-- Minion 
-GameObject <|-- Shot
-GameObject <|-- EnemyBullet
-GameObject <|-- Laser
-GameObject <|-- Item
+Actor <|-- Shot
+Actor <|-- Bullet
+Actor <|-- Laser
+Actor <|-- Item
 
 
-GameObject --> Collider : has
+Actor -> Collider : has
 
 '== 当たり判定 ==
 class Collider
 class CollisionManager
 
-CollisionManager --> GameObject : checks *
+CollisionManager --> Collider : checks *
 
-'== 弾幕システム ==
-class BulletManager
-class BulletPattern
-class EnemyScriptRunner
-
-BulletManager --> EnemyBullet : creates
-Enemy --> EnemyScriptRunner : has
-EnemyScriptRunner --> BulletPattern : uses
-
-'== プレイヤー入力 ==
-class PlayerInput
-class PlayerController
-
-PlayerController --> PlayerInput : reads
-Player --> PlayerController : controlled by
 
 '== UI ==
 class UIManager
