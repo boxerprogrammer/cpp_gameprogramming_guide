@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="DrawUtil.cpp" />
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\CommandListScene.cpp" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="DrawUtil.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Scene\CommandListScene.h" />
     <ClInclude Include="Scene\GameScene.h" />

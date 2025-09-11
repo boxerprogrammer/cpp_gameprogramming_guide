@@ -27,7 +27,7 @@ const Size& Application::GetWindowSize() const
 
 bool Application::Init(int w,int h)
 {
-    windowSize_ = { w,h };
+    windowSize_ = { static_cast<float>(w),static_cast<float>(h) };
     SetGraphMode(w, h, 32);
     ChangeWindowMode(true);
     if (DxLib_Init() == -1) {
@@ -48,7 +48,6 @@ void Application::Run()
         input.Update();
         controller.Update(input);
         controller.Draw();
-
         ScreenFlip();
     }
 }

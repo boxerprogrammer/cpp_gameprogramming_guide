@@ -13,7 +13,8 @@ void SceneController::ChangeScene(std::shared_ptr<Scene> scene)
 	//もし、scene_にすでに値が入っていた場合は
 	//shared_ptrなので、もとのscene_の参照人数が0に
 	//なり、自動で解放されます。
-	//もし、shared_ptrを使ってない場合
+	//もし、shared_ptrを使ってない場合は大入をする前にnullptrチェックをしたうえで
+	//deleteをする必要があります。
 }
 
 void SceneController::Update(Input& input)
