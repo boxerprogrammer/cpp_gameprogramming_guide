@@ -1,3 +1,4 @@
+#include "Geometry.h"
 #include"Geometry.h"
 #include<DxLib.h>
 #include<cmath>
@@ -18,6 +19,11 @@ void
 Vector2::operator*=(float scale) {
 	x *= scale;
 	y *= scale;
+}
+
+Vector2 Vector2::operator+(const Vector2& vec) const
+{
+	return Vector2();
 }
 
 Vector2
