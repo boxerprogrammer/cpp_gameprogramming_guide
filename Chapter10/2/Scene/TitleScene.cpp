@@ -26,7 +26,6 @@ void TitleScene::NormalUpdate(Input& input)
 		frame_ = 0;
 		return;
 	}
-
 }
 
 void TitleScene::FadeOutUpdate(Input&)
