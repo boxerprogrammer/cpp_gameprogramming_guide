@@ -8,6 +8,13 @@ private:
 	int frame_;//経過フレーム
 	int life_=2;//2発当てないと死なない
 	float sign_ = 1.0f;
+	Vector2 vel_ = {};
+	using UpdateFunc_t = void (PataPata::*)();
+	UpdateFunc_t update_;
+
+	void WaveForwardUpdate();//波打ち前進
+
+	void WaveBackUpdate();//波打ち後退
 public:
 	/// <summary>
 	/// 雑魚のコンストラクタ

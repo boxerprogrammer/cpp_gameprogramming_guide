@@ -55,11 +55,12 @@ void TitleScene::FadeDraw()
 
 TitleScene::TitleScene(SceneController& controller):Scene(controller),
 frame_(fade_interval),
-update_(&TitleScene::FadeInUpdate)
+update_(&TitleScene::FadeInUpdate),
+draw_(& TitleScene::FadeDraw)
 {
 	titleH_ = LoadGraph(L"resource/img/title_bg.png");
 	titleLogoH_ = LoadGraph(L"resource/img/game_title.png");
-	draw_ = &TitleScene::FadeDraw;
+	
 	frame_ = fade_interval;
 }
 

@@ -9,6 +9,8 @@ private:
 	int handle_;//画像ハンドル(Factoryからもらったもの)
 	int frame_;//経過フレーム
 
+	Vector2 vel_ = {};//敵の速度ベクトル
+
 	using UpdateFunc_t = void (Zako::*)();
 	UpdateFunc_t update_;
 

@@ -28,6 +28,7 @@ const Size& Application::GetWindowSize() const
 bool Application::Init(int w,int h)
 {
     windowSize_ = { static_cast<float>(w),static_cast<float>(h) };
+    SetWindowText(L"縦シューティングゲームサンプル");
     SetGraphMode(w, h, 32);
     ChangeWindowMode(true);
     if (DxLib_Init() == -1) {
