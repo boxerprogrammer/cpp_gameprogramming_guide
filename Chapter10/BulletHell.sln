@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletHell2", "2\BulletHell
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletHell3", "3\BulletHell3.vcxproj", "{67D4D049-E757-4F04-A1C7-013E5E723B65}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletHell4", "4\BulletHell4.vcxproj", "{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{67D4D049-E757-4F04-A1C7-013E5E723B65}.Release|x64.Build.0 = Release|x64
 		{67D4D049-E757-4F04-A1C7-013E5E723B65}.Release|x86.ActiveCfg = Release|Win32
 		{67D4D049-E757-4F04-A1C7-013E5E723B65}.Release|x86.Build.0 = Release|Win32
+		{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}.Debug|x64.ActiveCfg = Debug|x64
+		{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}.Debug|x64.Build.0 = Debug|x64
+		{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}.Debug|x86.ActiveCfg = Debug|Win32
+		{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}.Debug|x86.Build.0 = Debug|Win32
+		{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}.Release|x64.ActiveCfg = Release|x64
+		{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}.Release|x64.Build.0 = Release|x64
+		{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}.Release|x86.ActiveCfg = Release|Win32
+		{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
