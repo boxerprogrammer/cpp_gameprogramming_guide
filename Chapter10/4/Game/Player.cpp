@@ -2,6 +2,7 @@
 #include"Enemy.h"
 #include"../Input.h"
 #include"../Scene/GameScene.h"
+#include"../ResourceManager.h"
 #include<DxLib.h>
 #include<cassert>
 
@@ -47,7 +48,7 @@ Player::Player(GameScene& gameScene):
 	pos_ = circle_.pos;
 	actorType_ = ActorType::player;
 	//使用する画像をロード
-	handle_ = LoadGraph(L"img/game/player.png");
+	handle_ = mylib::LoadTexture(L"img/game/player.png");
 	assert(handle_ >= 0);
 
 }

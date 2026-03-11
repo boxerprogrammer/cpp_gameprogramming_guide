@@ -5,6 +5,7 @@
 #include"ZakoSpawner.h"
 #include<DxLib.h>
 #include"../Application.h"
+#include"../ResourceManager.h"
 #include<cassert>
 
 constexpr int cell_size = 32;//セルサイズ(マップの１セルの大きさ)
@@ -19,14 +20,11 @@ EnemyFactory::EnemyFactory(std::shared_ptr<Player> player,std::shared_ptr<Bullet
     //敵の表示に必要な画像のハンドルをあらかじめロードしておく
     handles_.push_back(-1);//何もない(使用しない)
     int handle = -1;
-    handle = LoadGraph(L"img/game/zako.png");//1番(雑魚)
-    assert(handle >= 0);//←いま追加したばかりのハンドルのチェック
+    handle = mylib::LoadTexture(L"img/game/zako.png");//1番(雑魚)
     handles_.push_back(handle);//1番
-    handle = LoadGraph(L"img/game/patapata.png");//2番(パタパタ)
-    assert(handle >= 0);//←いま追加したばかりのハンドルのチェック
+    handle = mylib::LoadTexture(L"img/game/patapata.png");//2番(パタパタ)
     handles_.push_back(handle);//2番
-    handle = LoadGraph(L"img/game/strider.png");//3番(ストライダー)
-    assert(handle >= 0);//←いま追加したばかりのハンドルのチェック
+    handle = mylib::LoadTexture(L"img/game/strider.png");//3番(ストライダー)
     handles_.push_back(handle);//3番
 }
 

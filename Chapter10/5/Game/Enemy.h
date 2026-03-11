@@ -56,6 +56,8 @@ public:
 	/// </summary>
 	virtual void Draw()=0;
 
+	virtual uint64_t GetScore()const { return 0; };//倒したときのスコアを返す(倒したときにスコアを加算するため)
+
 	virtual ~Enemy() {};//←基底クラスのデストラクタはvirtualにしておくこと
 };
 

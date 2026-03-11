@@ -36,6 +36,9 @@ public:
 		std::shared_ptr<BulletFactory> bf, 
 		std::shared_ptr<EffectFactory> ef,
 		const Position2& pos);
+
+	uint64_t GetScore()const override { return 100; };//ザコスコア100点
+
 	/// <summary>
 	/// 雑魚の座標等更新
 	/// </summary>

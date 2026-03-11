@@ -32,5 +32,7 @@ public:
 	/// </summary>
 	/// <param name="actor">当たった相手</param>
 	void OnHit(const Actor& actor)override;
+
+	uint64_t GetScore()const override { return 800; };//ストライダーのスコアは800点
 };
 

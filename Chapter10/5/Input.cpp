@@ -2,6 +2,8 @@
 #include<DxLib.h>
 #include"StringFunctions.h"
 
+#include<algorithm>
+
 constexpr char config_file_name[] = "keyconf.kcnf";
 
 namespace {
@@ -175,7 +177,7 @@ void Input::Load()
             byte dataNum = 0;
             FileRead_read(&dataNum, sizeof(dataNum), handle);//データ数を取得
             //もとのvectorサイズを越えないようにminで小さいほうを選ぶようにする
-            dataNum = min(dataNum, info.size());//inputTable_[name]内のvectorをオーバーしないように
+            dataNum = std::min(dataNum, static_cast<byte>(info.size()));//inputTable_[name]内のvectorをオーバーしないように
             //必要なぶんだけデータをファイルからリードしてコピー
             FileRead_read(info.data(), dataNum * sizeof(InputState), handle);
         }

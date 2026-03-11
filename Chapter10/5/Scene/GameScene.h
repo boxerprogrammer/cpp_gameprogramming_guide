@@ -4,6 +4,9 @@
 #include<memory>
 
 //プロトタイプ宣言
+class GameUI;//ゲームUI
+class PlayerStatus;//プレイヤーステータス
+class Score;//スコア
 class Stage;//ステージ
 class Player;//プレイヤー
 class EnemyFactory;//敵ファクトリ
@@ -50,7 +53,11 @@ private:
 	int topIdx_=0;//現在のステージデータのトップ
 	int scroll_=-1;//スクロール値
 
+	std::shared_ptr<GameUI> gameUI_;//ゲームUI
+	std::shared_ptr<PlayerStatus> playerStatus_;//プレイヤーステータス
+	std::shared_ptr<Score> score_;//スコア
 	std::shared_ptr<Stage> stage_;//ステージデータ
+
 	std::shared_ptr<Player> player_;//プレイヤー
 	std::shared_ptr<EnemyFactory> enemyFactory_;//敵生産工場
 	std::shared_ptr<BulletFactory> bulletFactory_;//弾生産工場(仮)

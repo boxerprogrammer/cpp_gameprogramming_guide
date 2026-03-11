@@ -1,10 +1,11 @@
 #include "SceneController.h"
 #include"Scene.h"
+#include"../Game/GameData.h"
 
 
 SceneController::SceneController()
 {
-
+	gameData_ = std::make_shared<GameData>();
 }
 
 SceneController::~SceneController()

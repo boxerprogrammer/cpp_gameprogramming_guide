@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Game\GameData.cpp" />
+    <ClCompile Include="Game\GameUI.cpp" />
     <ClCompile Include="Game\Actor.cpp" />
     <ClCompile Include="Game\Bullet.cpp" />
     <ClCompile Include="Game\BulletFactory.cpp" />
@@ -35,9 +37,12 @@
     <ClCompile Include="Game\Stage.cpp" />
     <ClCompile Include="Game\Strider.cpp" />
     <ClCompile Include="Game\Zako.cpp" />
+    <ClCompile Include="Game\ZakoSpawner.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game\PlayerStatus.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene\GameoverScene.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="Scene\KeyConfigScene.cpp" />
@@ -45,11 +50,13 @@
     <ClCompile Include="Scene\Scene.cpp" />
     <ClCompile Include="Scene\SceneController.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
-    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="Game\Score.cpp" />
     <ClCompile Include="StringFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Game\GameData.h" />
+    <ClInclude Include="Game\GameUI.h" />
     <ClInclude Include="Game\Actor.h" />
     <ClInclude Include="Game\Bullet.h" />
     <ClInclude Include="Game\BulletFactory.h" />
@@ -65,8 +72,11 @@
     <ClInclude Include="Game\Stage.h" />
     <ClInclude Include="Game\Strider.h" />
     <ClInclude Include="Game\Zako.h" />
+    <ClInclude Include="Game\ZakoSpawner.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Game\PlayerStatus.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene\GameoverScene.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Scene\KeyConfigScene.h" />
@@ -74,13 +84,13 @@
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="Scene\SceneController.h" />
     <ClInclude Include="Scene\TitleScene.h" />
-    <ClInclude Include="Score.h" />
+    <ClInclude Include="Game\Score.h" />
     <ClInclude Include="StringFunctions.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{46DA15E4-F282-4CB5-AC7B-6F94BECCAC6F}</ProjectGuid>
+    <ProjectGuid>{598C0E64-0C57-476B-8E58-CA26E89EB929}</ProjectGuid>
     <RootNamespace>BulletHell</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -88,26 +98,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

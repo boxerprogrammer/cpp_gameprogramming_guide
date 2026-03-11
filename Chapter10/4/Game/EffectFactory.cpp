@@ -3,6 +3,7 @@
 #include"Damage.h"
 #include"Explosion.h"
 #include"EnemyDeadExplosion.h"
+#include"../ResourceManager.h"
 #include<algorithm>
 #include<DxLib.h>
 #include<cassert>
@@ -11,14 +12,11 @@ EffectFactory::EffectFactory()
 {
 	int handle = -1;
 	handles_.push_back(handle);
-	handle = LoadGraph(L"img/game/damage.png");
-	assert(handle >= 0);
+	handle = mylib::LoadTexture(L"img/game/damage.png");
 	handles_.push_back(handle);
-	handle = LoadGraph(L"img/game/explosion.png");
-	assert(handle >= 0);
+	handle = mylib::LoadTexture(L"img/game/explosion.png");
 	handles_.push_back(handle);
-	handle = LoadGraph(L"img/game/enemy_dead_1.png");
-	assert(handle >= 0);
+	handle = mylib::LoadTexture(L"img/game/enemy_dead_1.png");
 	handles_.push_back(handle);
 }
 

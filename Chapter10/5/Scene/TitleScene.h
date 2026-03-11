@@ -17,13 +17,9 @@ private:
 	int psH_;//ピクセルシェーダハンドル
 	int psNormH_;//法線マップピクセルシェーダハンドル
 
-	int backH_;
-	int cloudH_;//雲模様を読み込む
 	int titleH_;//タイトル画像ハンドル
-	int titleNormalH_;//タイトル画像法線ハンドル
 	int titleLogoH_;//タイトルロゴハンドル
 	int fadeFrame_;//経過フレーム
-	int titleFontH_;
 	int frame_=0;
 	int startSE_ = 0;
 

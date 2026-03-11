@@ -44,7 +44,7 @@ void Stage::Load(int stageNo)
 	dataSize_.h = header.height;
 
 	//データを受け取る準備をします
-	data_.resize(header.size);
+	data_.resize(header.setting.layerCount);
 	//生データ(データをひっくりかえすために一時的に用意)
 	std::vector<std::vector<uint8_t>> rawData;
 	rawData.resize(header.setting.layerCount);//レイヤー数を確保してるだけ

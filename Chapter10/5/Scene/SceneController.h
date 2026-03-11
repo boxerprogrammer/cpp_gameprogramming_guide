@@ -3,13 +3,14 @@
 #include<list>
 class Input;
 class Scene;
-
+class GameData;
 /// <summary>
 /// シーンを内部に保持し、切り替えを提供する
 /// </summary>
 class SceneController
 {
 private:
+	std::shared_ptr<GameData> gameData_;
 	//現在スタックに積まれてるシーン
 	//最後に積んだものだけがUpdateされる
 	std::list<std::shared_ptr<Scene>> scenes_;
@@ -18,6 +19,8 @@ public:
 	SceneController();
 	~SceneController();
 	
+	std::shared_ptr<GameData> GetGameData() const { return gameData_; }
+
 	/// <summary>
 	/// 強制的なシーンの切り替え(ただし、引数で渡されたシーンのみになる)
 	/// </summary>
