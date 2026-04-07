@@ -367,7 +367,7 @@ GameScene::NormalDraw() {
 	player_->Draw();
 
 	//UI表示
-	//gameUI_->Draw();
+	gameUI_->Draw();
 
 }
 

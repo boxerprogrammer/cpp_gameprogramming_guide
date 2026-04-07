@@ -12,7 +12,7 @@ class PauseScene : public Scene
 private:
 	//メニュー名と実行内容の対応テーブル
 	std::vector<std::wstring> menuList_;//ポーズ画面中に表示するメニューリスト
-	std::map < std::wstring, std::function<void(Input&)>> execTable_;
+	std::map < std::wstring, std::function<void(Input&)>> execTable_;//メニューアイテムの名前と、そのメニューが選ばれたときに実行される内容の対応表
 
 	int frame_ = 0;
 	int selectIndex_ = 0;//現在選択中のインデックス
