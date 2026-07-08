@@ -2,6 +2,7 @@
 #include<memory>
 #include<list>
 #include<vector>
+#include<map>
 
 
 /// <summary>
@@ -13,6 +14,7 @@ enum class EnemyType {
 	patapata,//パタパタ
 	strider,//ストライダー
 	zako_spawner,//雑魚発生装置
+	boss1=15,//1面ボス
 };
 //プロトタイプ宣言
 class Enemy;
@@ -27,7 +29,9 @@ class EnemyFactory
 private:
 	//あらかじめ敵の表示に必要な画像データをロードして
 	//保持しておく
-	std::vector<int> handles_;//敵全員のハンドルを持っておく
+	//敵全員のハンドルを持っておく
+	//vectorでなくmapで持っておくと、敵の種類が増えたときに柔軟に対応できる
+	std::map<EnemyType,int> enemyImageTable_;
 
 	std::shared_ptr<BulletFactory> bulletFactory_;//Enemyに渡す弾生産工場のポインタ
 	std::shared_ptr<EffectFactory> effectFactory_;//Enemyに渡すエフェクト生産工場

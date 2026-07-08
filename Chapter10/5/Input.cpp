@@ -102,21 +102,23 @@ void Input::Update() {
             }
         }
     }
-
 }
 
 bool Input::IsPressed(const char* name) const
 {
     //もし「ない」イベントを送られるとクラッシュします
     //クラッシュがいやだったら
-    //if (inputData_.contains(name)) {
-    //    return false;//で回避できます
-    //}
+    if (!inputData_.contains(name)) {
+        return false;//で回避できます
+    }
     return inputData_.at(name);//const関数内部なので[]ではなくatを使用してる
 }
 
 bool Input::IsTriggered(const char* name) const
 {
+    if(!inputData_.contains(name)) {
+        return false;
+	}
     return inputData_.at(name) && !lastInputData_.at(name);
 }
 

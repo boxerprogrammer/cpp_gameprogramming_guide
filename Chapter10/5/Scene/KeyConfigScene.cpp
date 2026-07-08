@@ -287,7 +287,7 @@ int KeyConfigScene::DrawInputTableList(uint32_t selectColor)
 	//枠表示
 	DrawFrame(centerX, centerY, frameW, frameH);
 
-	//名前のテーブルを作っておく
+	//周辺機器種別名前のテーブルを作っておく
 	std::map<PeripheralType, std::wstring> periNameTable;
 	periNameTable[PeripheralType::keyboard] = L"キーボード";
 	periNameTable[PeripheralType::pad1] = L"パッド";

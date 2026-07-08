@@ -1,6 +1,7 @@
 #pragma once
 #include<array>
 #include<map>
+#include<unordered_map>
 #include<string>
 #include<vector>
 
@@ -32,13 +33,15 @@ class Input
 	//キーコンフィグだけはInputTable等をいじることができる
 	friend KeyConfigScene;//KeyConfigSceneはズッ友だよ
 private:
-	std::map<std::string, std::vector<InputState>> inputTable_;//イベント名と実際の入力の対応表
+	using InputTable_t = std::map<std::string, std::vector<InputState>>;
+	InputTable_t inputTable_;//イベント名と実際の入力の対応表
 	//仮の入力テーブル
 	//キーコンフィグが終わったら破棄される
-	std::map<std::string, std::vector<InputState>> tempInputTable_;//一時的な入力対応テーブル
+	InputTable_t tempInputTable_;//一時的な入力対応テーブル
 
-	std::map<std::string, bool> inputData_;//実際に入力されたかどうかのデータ
-	std::map<std::string, bool> lastInputData_;//実際に入力されたかどうかのデータ
+	using InputData_t = std::unordered_map<std::string, bool>;
+	InputData_t inputData_;//実際に入力されたかどうかのデータ
+	InputData_t lastInputData_;//実際に入力されたかどうかの直前データ(トリガーに利用)
 	//キーコンフィグできるイベント名配列
 	std::vector<std::string> editableEventNames_;
 

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Game\Boss.cpp" />
     <ClCompile Include="Game\GameData.cpp" />
     <ClCompile Include="Game\GameUI.cpp" />
     <ClCompile Include="Game\Actor.cpp" />
@@ -55,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Game\Boss.h" />
     <ClInclude Include="Game\GameData.h" />
     <ClInclude Include="Game\GameUI.h" />
     <ClInclude Include="Game\Actor.h" />

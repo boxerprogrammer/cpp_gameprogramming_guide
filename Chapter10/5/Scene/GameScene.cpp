@@ -74,11 +74,8 @@ bullets_{}
 	}
 
 	shotH_ = mylib::LoadTexture(L"img/game/bullet.png");
-	assert(shotH_ >= 0);
 	backH_ = mylib::LoadTexture(L"img/game/background.png");
-	assert(backH_ >= 0);
 	cloudH_ = mylib::LoadTexture(L"img/game/cloud.png");
-	assert(cloudH_ >= 0);
 
 	shotSE_ = LoadSoundMem(L"se/shot.wav");
 	explosionSE_ = LoadSoundMem(L"se/explosion.wav");
@@ -302,7 +299,6 @@ void
 GameScene::NormalDraw() {
 	const auto& wsize = Application::GetInstance().GetWindowSize();
 	constexpr int cloud_height = 160;
-	int cloudYOffset = (gameFrame_ * 5) % wsize.h;//雲
 	int bgYOffset = (gameFrame_*2)% wsize.h;//画面の高さぶん進んだらオフセット座標をリセット
 	//背景(永遠スクロールの場合必要な枚数は、一度に表示する枚数＋１)
 	//↓０フレームの時は、画面上に映っていません
@@ -310,7 +306,9 @@ GameScene::NormalDraw() {
 	//常に移っているけれども画面の高さぶん進んだ時点で見えなくなる
 	DrawExtendGraph(0, 0 + bgYOffset, wsize.w, wsize.h + bgYOffset, backH_, false);
 
+	
 	//雲
+	int cloudYOffset = (gameFrame_ * 5) % wsize.h;//雲
 	//↓０フレームの時は、画面上に映っていません
 	DrawExtendGraph(0, cloudYOffset- wsize.h, wsize.w, cloud_height+cloudYOffset- wsize.h, cloudH_, true);
 	//常に移っているけれども画面の高さぶん進んだ時点で見えなくなる

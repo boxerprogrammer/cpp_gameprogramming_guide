@@ -3,6 +3,7 @@
 #include"PataPata.h"
 #include"Strider.h"
 #include"ZakoSpawner.h"
+#include"Boss.h"
 #include<DxLib.h>
 #include"../Application.h"
 #include"../ResourceManager.h"
@@ -18,20 +19,15 @@ EnemyFactory::EnemyFactory(std::shared_ptr<Player> player,std::shared_ptr<Bullet
 {
     //コンストラクタ内で、必要な敵の画像をすべてロードしておく
     //敵の表示に必要な画像のハンドルをあらかじめロードしておく
-    handles_.push_back(-1);//何もない(使用しない)
     int handle = -1;
-    handle = mylib::LoadTexture(L"img/game/zako.png");//1番(雑魚)
-    handles_.push_back(handle);//1番
-    handle = mylib::LoadTexture(L"img/game/patapata.png");//2番(パタパタ)
-    handles_.push_back(handle);//2番
-    handle = mylib::LoadTexture(L"img/game/strider.png");//3番(ストライダー)
-    handles_.push_back(handle);//3番
+    enemyImageTable_[EnemyType::zako] = mylib::LoadTexture(L"img/game/zako.png");//1番(雑魚)
+    enemyImageTable_[EnemyType::patapata] = mylib::LoadTexture(L"img/game/patapata.png");//2番(パタパタ)
+    enemyImageTable_[EnemyType::strider] = mylib::LoadTexture(L"img/game/strider.png");//3番(ストライダー)
+    enemyImageTable_[EnemyType::boss1] = mylib::LoadTexture(L"img/game/boss.png");//15番(1面ボス)
 }
 
-std::shared_ptr<Enemy> EnemyFactory::Create(
-                            int idxX,
-                            int idxY, 
-                            EnemyType enemyType)
+std::shared_ptr<Enemy> 
+EnemyFactory::Create(int idxX,int idxY, EnemyType enemyType)
 {
     const auto& wsize = Application::GetInstance().GetWindowSize();
     if (enemyType == EnemyType::none) {
@@ -45,7 +41,7 @@ std::shared_ptr<Enemy> EnemyFactory::Create(
     switch (enemyType) {
         case EnemyType::zako://雑魚１
             enemies_.push_back(std::make_shared<Zako>(
-                                handles_[(int)EnemyType::zako],//雑魚のハンドル
+                                enemyImageTable_[EnemyType::zako],//雑魚のハンドル
                                 player_,//プレイヤーへのポインタ
                                 bulletFactory_,//弾生産工場のポインタ
                                 effectFactory_,
@@ -53,7 +49,7 @@ std::shared_ptr<Enemy> EnemyFactory::Create(
             return enemies_.back();//今追加したばかりの雑魚を返す
         case EnemyType::patapata://パタパタ
             enemies_.push_back(std::make_shared<PataPata>(
-                handles_[(int)EnemyType::patapata],//パタパタのハンドル
+                enemyImageTable_[EnemyType::patapata],//パタパタのハンドル
                 player_,//プレイヤーへのポインタ
                 bulletFactory_,//弾生産工場のポインタ
                 effectFactory_,
@@ -61,7 +57,7 @@ std::shared_ptr<Enemy> EnemyFactory::Create(
             return enemies_.back();
         case EnemyType::strider://ストライダー
             enemies_.push_back(std::make_shared<Strider>(
-                handles_[(int)EnemyType::strider],//パタパタのハンドル
+                enemyImageTable_[EnemyType::strider],//ストライダーのハンドル
                 player_,//プレイヤーへのポインタ
                 bulletFactory_,//弾生産工場のポインタ
                 effectFactory_,
@@ -70,6 +66,14 @@ std::shared_ptr<Enemy> EnemyFactory::Create(
         case EnemyType::zako_spawner:
             enemies_.push_back(std::make_shared<ZakoSpawner>(
                 *this,
+                pos));//管理できるように内部のlistに登録
+            return enemies_.back();
+        case EnemyType::boss1:
+            enemies_.push_back(std::make_shared<Boss>(
+                enemyImageTable_[EnemyType::boss1],//ボスのハンドル
+                player_,//プレイヤーへのポインタ
+                bulletFactory_,//弾生産工場のポインタ
+                effectFactory_,
                 pos));//管理できるように内部のlistに登録
             return enemies_.back();
         default:
@@ -97,7 +101,7 @@ void EnemyFactory::Draw() {
 
 EnemyFactory::~EnemyFactory()
 {
-    for (int handle : handles_) {
-        DeleteGraph(handle);
+    for (const auto& pair : enemyImageTable_) {
+        DeleteGraph(pair.second);
     }
 }

@@ -49,8 +49,6 @@ Player::Player(GameScene& gameScene):
 	actorType_ = ActorType::player;
 	//使用する画像をロード
 	handle_ = mylib::LoadTexture(L"img/game/player.png");
-	assert(handle_ >= 0);
-
 }
 
 

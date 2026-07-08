@@ -68,7 +68,7 @@ private:
 	int shotH_;//プレイヤーのショット(敵の弾も兼用)
 	int explosionH_;//爆発画像
 
-	int backH_;//1枚絵
+	int backH_;//背景画像
 	int cloudH_;//多重スクロール用雲画像
 
 	int frame_=0;//フェードインアウト用
