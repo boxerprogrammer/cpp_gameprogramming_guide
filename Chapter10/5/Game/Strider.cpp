@@ -14,6 +14,7 @@ frame_(0),
 handle_(handle),
 Enemy(ply,bf,ef,pos,20.0f)
 {
+	life_ = 5;
 
 }
 

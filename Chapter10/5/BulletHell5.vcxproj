@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Game\BombExplosion.cpp" />
     <ClCompile Include="Game\Boss.cpp" />
     <ClCompile Include="Game\GameData.cpp" />
     <ClCompile Include="Game\GameUI.cpp" />
@@ -56,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Game\BombExplosion.h" />
     <ClInclude Include="Game\Boss.h" />
     <ClInclude Include="Game\GameData.h" />
     <ClInclude Include="Game\GameUI.h" />

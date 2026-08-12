@@ -3,6 +3,7 @@
 #include"Damage.h"
 #include"Explosion.h"
 #include"EnemyDeadExplosion.h"
+#include"BombExplosion.h"
 #include"../ResourceManager.h"
 #include<algorithm>
 #include<DxLib.h>
@@ -18,6 +19,8 @@ EffectFactory::EffectFactory()
 	handles_.push_back(handle);
 	handle = mylib::LoadTexture(L"img/game/enemy_dead_1.png");
 	handles_.push_back(handle);
+	handle = mylib::LoadTexture(L"img/game/bomb_explosion.png");
+	handles_.push_back(handle);
 }
 
 void EffectFactory::Create(const Position2& pos, EffectType type)
@@ -31,6 +34,9 @@ void EffectFactory::Create(const Position2& pos, EffectType type)
 		break;
 	case EffectType::enemy_dead_1:
 		effects_.push_back(std::make_shared<EnemyDeadExplosion>(handles_[(int)type], pos));
+		break;
+	case EffectType::bomb_explosion:
+		effects_.push_back(std::make_shared<BombExplosion>(handles_[(int)type], pos));
 		break;
 	default:
 		break;

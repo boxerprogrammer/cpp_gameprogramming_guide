@@ -2,32 +2,43 @@
 #include "PlayerStatus.h"
 
 void PlayerStatus::LoseLife()
-{}
-
-bool PlayerStatus::UseBomb()
 {
-    return false;
+	--lives_;
+	bombs_ = initial_bombs;
+}
+
+void PlayerStatus::UseBomb()
+{
+    --bombs_;
 }
 
 void PlayerStatus::ExtendLife()
-{}
+{
+	if (lives_ < max_lives) {
+		++lives_;
+	}
+}
 
 void PlayerStatus::AddBomb()
-{}
+{
+	if (bombs_ < max_bombs) {
+		++bombs_;
+	}
+}
 
 int PlayerStatus::GetLives() const
 {
-    return 0;
+    return lives_;
 }
 
-int PlayerStatus::GetBombs() const
+int PlayerStatus::GetBombsCount() const
 {
-    return 0;
+    return bombs_;
 }
 
 bool PlayerStatus::IsGameOver() const
 {
-    return false;
+    return lives_ <= 0;
 }
 
 void PlayerStatus::AddPlayerLevel()

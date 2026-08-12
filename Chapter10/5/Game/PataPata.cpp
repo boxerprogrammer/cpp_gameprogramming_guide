@@ -76,8 +76,9 @@ PataPata::PataPata(int handle, std::shared_ptr<Player> ply,
 	const Position2& pos) :
 	frame_(0),
 	handle_(handle),
-	Enemy(ply,bf,ef,pos,13.0f)
+	Enemy(ply, bf, ef, pos, 13.0f)
 {
+	life_ = 2;
 	if (GetRand(2) % 2 == 0) {
 		sign_ = -1.0f;
 	}

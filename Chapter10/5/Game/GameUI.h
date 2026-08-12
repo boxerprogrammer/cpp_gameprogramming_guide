@@ -30,12 +30,14 @@ public:
     /// （ゲームオブジェクトより手前に表示するため）
     /// </summary>
     void Draw() const;
-
+    int GetLeft()const;
 private:
     // 描画に使うデータへの const 参照（所有しない）
     const Score&         score_;
     const PlayerStatus&  playerStatus_;
     const GameData&      gameData_;
+
+
 
     // フォントハンドル（GameUI が所有・破棄する）
     int fontH_ = -1;

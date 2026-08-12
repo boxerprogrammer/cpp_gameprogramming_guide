@@ -16,6 +16,7 @@ class Enemy : public Actor
 protected:
 	Circle circle_;//当たり判定用
 	bool isDead_ = false;//死亡フラグ
+	int life_ = 1;//ライフ
 	//プレイヤーを持っておく(自機狙い弾等を出すため)
 	std::shared_ptr<Player> player_;
 	//弾をBulletFactoryという弾工場に管理させるために
@@ -46,7 +47,7 @@ public:
 	//他のオブジェクトに当たった時に呼び出されます
 	virtual void OnHit(const Actor& actor) {};
 	virtual void OnDead();
-
+	virtual void Damage(int damage);
 	virtual uint64_t GetScore()const { return 0; };//倒したときのスコアを返す(倒したときにスコアを加算するため)
 
 	virtual ~Enemy() {};//←基底クラスのデストラクタはvirtualにしておくこと

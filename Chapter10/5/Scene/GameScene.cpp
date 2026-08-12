@@ -41,6 +41,8 @@ constexpr int enemy_cut_w = 16;
 constexpr int enemy_cut_h = 16;
 constexpr float enemy_scale = 2.5f;
 
+constexpr int top_chip_index = 15;
+
 constexpr int cell_size = 32;
 
 /// <summary>
@@ -77,8 +79,9 @@ bullets_{}
 	backH_ = mylib::LoadTexture(L"img/game/background.png");
 	cloudH_ = mylib::LoadTexture(L"img/game/cloud.png");
 
-	shotSE_ = LoadSoundMem(L"se/shot.wav");
-	explosionSE_ = LoadSoundMem(L"se/explosion.wav");
+	shotSE_ = mylib::LoadSE(L"se/shot.wav");
+	explosionSE_ = mylib::LoadSE(L"se/explosion.wav");
+	bombSE_ = mylib::LoadSE(L"se/bomb.wav");
 	frame_ = fade_interval;
 
 	//ステージデータのロード
@@ -92,7 +95,7 @@ bullets_{}
 	playerStatus_ = std::make_shared<PlayerStatus>();
 	bulletFactory_ = std::make_shared<BulletFactory>();
 	effectFactory_ = std::make_shared<EffectFactory>();
-	enemyFactory_ = std::make_shared< EnemyFactory>(player_,bulletFactory_,effectFactory_);
+	enemyFactory_ = std::make_shared< EnemyFactory>(*this, player_,bulletFactory_,effectFactory_);
 	gameUI_.reset(new GameUI(*score_.get(), *playerStatus_.get(), *controller.GetGameData().get()));
 
 	const auto& wsize = Application::GetInstance().GetWindowSize();
@@ -105,6 +108,18 @@ GameScene::~GameScene()
 	DeleteGraph(renderTarget_);
 	DeleteGraph(renderTargetBokeh_);
 	DeleteSoundMem(shotSE_);
+	DeleteSoundMem(explosionSE_);
+	DeleteSoundMem(bombSE_);
+}
+
+void GameScene::OnEnterBoss()
+{
+	PlayMusic(L"../resource/bgm/boss.wav", DX_PLAYTYPE_LOOP);
+}
+
+void GameScene::OnExitBoss()
+{
+	StopMusic();
 }
 
 void GameScene::DoHitStop()
@@ -117,7 +132,7 @@ void GameScene::DoHitStop()
 void 
 GameScene::FadeInUpdate(Input&) {
 	if (--frame_ <= 0) {
-		PlayMusic(L"bgm/bgm.wav",DX_PLAYTYPE_LOOP);
+		PlayMusic(L"../resource/bgm/bgm.wav",DX_PLAYTYPE_LOOP);
 		update_ = &GameScene::NormalUpdate;
 		draw_ = &GameScene::NormalDraw;
 		return;
@@ -155,6 +170,23 @@ GameScene::NormalUpdate(Input& input) {
 			}
 		}
 	}
+	if (input.IsTriggered("bomb")) {
+		if (playerStatus_->GetBombsCount() > 0) {
+			playerStatus_->UseBomb();
+			effectFactory_->Create(player_->GetPos(), EffectType::bomb_explosion);
+			PlaySoundMem(bombSE_, DX_PLAYTYPE_BACK);
+			//敵弾を全消し
+			//bulletFactory_->Clear();
+			auto& enemis = enemyFactory_->GetEnemies();
+			for (auto& enemy : enemis) {
+				if (enemy->IsDead())continue;
+				enemy->Damage(1000);
+				if (enemy->IsDead()) {
+					score_->Add(enemy->GetScore());
+				}
+			}
+		}
+	}
 	
 	const auto& wsize = Application::GetInstance().GetWindowSize();
 	//敵の生成
@@ -173,7 +205,7 @@ GameScene::NormalUpdate(Input& input) {
 			for (int idxX = 0; idxX < dataW; ++idxX) {
 				auto enemyType = enemyData[idxX + idxY * mapSize.w];
 				if ((EnemyType)enemyType != EnemyType::none) {
-					enemyFactory_->Create(idxX, 15,
+					enemyFactory_->Create(idxX, top_chip_index,
 						static_cast<EnemyType>(enemyType));
 				}
 				auto eventType = eventData[idxX + idxY * mapSize.w];
@@ -187,7 +219,6 @@ GameScene::NormalUpdate(Input& input) {
 			}
 			++topIdx_;
 		}
-		
 	}
 	//下限0でデクリメントする
 	scrollStopTimer_ = std::max(scrollStopTimer_ - 1, 0);
@@ -252,7 +283,8 @@ GameScene::NormalUpdate(Input& input) {
 		if (!player_->IsDead()) {
 			if (IsHit(bullet.circle, player_->GetCollision())) {
 				bullet.isDead = true;
-				//player_->OnHit()
+				playerStatus_->LoseLife();
+				//player_->OnHit(bullet);
 			}
 		}
 	}
@@ -261,6 +293,7 @@ GameScene::NormalUpdate(Input& input) {
 		for (auto& enemy : enemies) {
 			if (IsHit(enemy->GetCollision(), player_->GetCollision())) {
 				player_->OnHit(*enemy);
+				playerStatus_->LoseLife();
 				enemy->OnHit(*player_);
 				break;
 			}

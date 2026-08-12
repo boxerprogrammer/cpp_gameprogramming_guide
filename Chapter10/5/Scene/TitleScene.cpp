@@ -147,17 +147,19 @@ TitleScene::TitleScene(SceneController& controller):Scene(controller),
 fadeFrame_(fade_interval),
 update_(&TitleScene::FadeInUpdate)
 {
+	PlayMusic(L"../resource/bgm/title.mp3", DX_PLAYTYPE_LOOP);
 	titleH_ = mylib::LoadTexture(L"img/title_bg.png");
 	titleLogoH_ = mylib::LoadTexture(L"img/game_title.png");
 	draw_ = &TitleScene::FadeDraw;
 	fadeFrame_ = fade_interval;
 	
-	startSE_ = LoadSoundMem(L"se/start.wav");
+	startSE_ = mylib::LoadSE(L"se/start.wav");
 
 }
 
 TitleScene::~TitleScene()
 {
+	
 	DeleteGraph(titleH_);
 	DeleteGraph(titleLogoH_);
 	DeleteSoundMem(startSE_);

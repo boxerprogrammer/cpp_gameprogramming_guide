@@ -1,10 +1,11 @@
 #include "Player.h"
-#include"Enemy.h"
+#include"GameUI.h"
 #include"../Input.h"
 #include"../Scene/GameScene.h"
 #include"../ResourceManager.h"
 #include<DxLib.h>
 #include<cassert>
+#include<algorithm>
 
 constexpr float player_speed = 4.0f;//プレイヤーの移動速度
 constexpr float player_shot_speed = 8.0f;//プレイヤーの弾速度
@@ -27,6 +28,11 @@ void Player::NormalUpdate(Input& input) {
 		vel.x = -1.0f;
 	}
 	circle_.pos += vel.Normalized() * player_speed;
+
+	//補正(プレイヤーが画面からはみ出ないように)
+	circle_.pos.x = std::clamp(circle_.pos.x, circle_.r,static_cast<float>(gameScene_.GetGameUI().GetLeft() - circle_.r));
+	circle_.pos.y = std::clamp(circle_.pos.y, circle_.r, 480.0f - circle_.r);
+
 	pos_ = circle_.pos;
 }
 void Player::JustDieUpdate(Input& input)

@@ -21,6 +21,7 @@ class Enemy;
 class Player;
 class BulletFactory;
 class EffectFactory;
+class GameScene;
 /// <summary>
 /// “G¶YHê
 /// </summary>
@@ -37,8 +38,10 @@ private:
 	std::shared_ptr<EffectFactory> effectFactory_;//Enemy‚É“n‚·ƒGƒtƒFƒNƒg¶YHê
 	std::list<std::shared_ptr<Enemy>> enemies_;//ŠÇ—‚·‚×‚«“GW‡
 	std::shared_ptr<Player> player_;
+	GameScene& gameScene_;
 public:
-	EnemyFactory(std::shared_ptr<Player> player,std::shared_ptr<BulletFactory> bf,std::shared_ptr<EffectFactory> ef);
+	EnemyFactory(GameScene& gameScene,std::shared_ptr<Player> player,std::shared_ptr<BulletFactory> bf,std::shared_ptr<EffectFactory> ef);
+	~EnemyFactory();
 	/// <summary>
 	/// “G‚Ì¶¬‚ğs‚¤
 	/// </summary>
@@ -62,6 +65,6 @@ public:
 	/// “G‘SˆõDraw
 	/// </summary>
 	void Draw();
-	~EnemyFactory();
+
 };
 

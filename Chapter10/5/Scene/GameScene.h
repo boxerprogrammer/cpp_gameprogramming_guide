@@ -46,6 +46,7 @@ private:
 	Shot bullets_[128];//“G‚Ì’e
 	int shotSE_=0;
 	int explosionSE_ = 0;
+	int bombSE_ = 0;
 
 	int effResHandle_ = -1;
 	int effPlayHandle_ = -1;
@@ -96,6 +97,9 @@ private:
 public:
 	GameScene(SceneController& controller);
 	~GameScene();
+	const GameUI& GetGameUI()const { return *gameUI_; }
+	void OnEnterBoss();
+	void OnExitBoss();
 	void DoHitStop();
 	void Update(Input&)override;
 	void Draw()override;

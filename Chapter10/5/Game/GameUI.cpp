@@ -74,6 +74,11 @@ void GameUI::Draw() const
 // 内部ヘルパー
 // ----------------------------------------------------------------------------
 
+int GameUI::GetLeft() const
+{
+    return ui_panel_left;
+}
+
 void GameUI::DrawPanel() const
 {
     // 半透明の黒い背景をパネル領域に描画する
@@ -135,7 +140,7 @@ void GameUI::DrawBombs() const
 {
     DrawShadowedString(x_start_text, bomb_label_y, L"BOMB", kColorLabel);
 
-    const int bombs = playerStatus_.GetBombs();
+    const int bombs = playerStatus_.GetBombsCount();
 
     for (int i = 0; i < PlayerStatus::max_bombs; ++i) {
         if (x_start_icon + i * icon_space + icon_size > 640) break;

@@ -30,8 +30,7 @@ public:
     /// <summary>
     /// ボムを1つ使用する。残ボムが 0 のときは何もしない。
     /// </summary>
-    /// <returns>ボムを使用できた場合 true</returns>
-    bool UseBomb();
+    void UseBomb();
 
     /// <summary>残機を1増やす（エクステンド時）</summary>
     void ExtendLife();
@@ -44,7 +43,7 @@ public:
     // -------------------------------------------------------------------------
 
     int  GetLives() const;
-    int  GetBombs() const;
+    int  GetBombsCount() const;
 
     /// <summary>残機が0かどうかを返す（ゲームオーバー判定）</summary>
     bool IsGameOver() const;

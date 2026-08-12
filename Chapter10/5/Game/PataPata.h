@@ -6,7 +6,6 @@ class PataPata :
 private:
 	int handle_;//画像ハンドル(Factoryからもらったもの)
 	int frame_;//経過フレーム
-	int life_=2;//2発当てないと死なない
 	int waitFrame_ = 0;
 	float sign_ = 1.0f;
 	Vector2 vel_ = {};

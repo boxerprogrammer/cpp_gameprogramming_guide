@@ -36,3 +36,12 @@ void Enemy::OnDead()
 {
 	effectFactory_->Create(pos_, EffectType::enemy_dead_1);
 }
+
+void Enemy::Damage(int damage)
+{
+	life_ -= damage;
+	if (life_ <= 0) {
+		isDead_ = true;
+		OnDead();
+	}
+}

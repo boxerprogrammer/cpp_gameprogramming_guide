@@ -12,7 +12,8 @@
 constexpr int cell_size = 32;//セルサイズ(マップの１セルの大きさ)
 constexpr int half_cell_size = 32/2;//セルサイズの半分
 
-EnemyFactory::EnemyFactory(std::shared_ptr<Player> player,std::shared_ptr<BulletFactory> bf,std::shared_ptr<EffectFactory> ef):
+EnemyFactory::EnemyFactory(GameScene& gameScene,std::shared_ptr<Player> player,std::shared_ptr<BulletFactory> bf,std::shared_ptr<EffectFactory> ef):
+        gameScene_(gameScene),
         player_(player),
         bulletFactory_(bf),
         effectFactory_(ef)
@@ -65,11 +66,12 @@ EnemyFactory::Create(int idxX,int idxY, EnemyType enemyType)
             return enemies_.back();
         case EnemyType::zako_spawner:
             enemies_.push_back(std::make_shared<ZakoSpawner>(
-                *this,
+				*this,//自分自身のポインタを渡す
                 pos));//管理できるように内部のlistに登録
             return enemies_.back();
         case EnemyType::boss1:
             enemies_.push_back(std::make_shared<Boss>(
+                gameScene_,
                 enemyImageTable_[EnemyType::boss1],//ボスのハンドル
                 player_,//プレイヤーへのポインタ
                 bulletFactory_,//弾生産工場のポインタ

@@ -6,7 +6,6 @@ class Strider :
 private:
 	int handle_;//画像ハンドル(Factoryからもらったもの)
 	int frame_;//経過フレーム
-	int life_ = 5;//5発当てないと死なない
 	float sign_ = 1.0f;
 public:
 	/// <summary>

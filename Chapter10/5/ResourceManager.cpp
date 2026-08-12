@@ -13,3 +13,10 @@ int mylib::LoadTexture(const std::wstring& path)
     assert(handle != -1);
     return handle;
 }
+
+int mylib::LoadSE(const std::wstring& path)
+{
+	int handle = LoadSoundMem((resource_dir + path).c_str());
+    assert(handle != -1);
+    return handle;
+}

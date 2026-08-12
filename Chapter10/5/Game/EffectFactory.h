@@ -9,6 +9,7 @@ enum class EffectType {
 	damage,
 	explosion,
 	enemy_dead_1,//敵死亡エフェクト①
+	bomb_explosion,//ボム爆発エフェクト
 };
 /// <summary>
 /// エフェクトを生成、管理するだけのクラス
