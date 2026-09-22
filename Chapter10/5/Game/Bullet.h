@@ -15,7 +15,7 @@ private:
 	int handle_ = -1;//’e‚Ì‰æ‘œƒnƒ“ƒhƒ‹
 public:
 	Bullet() = default;
-	Bullet(int handle ,const Position2& pos, const Vector2& vel);
+	Bullet(std::weak_ptr<Actor> owner, int handle,const Position2& pos, const Vector2& vel);
 	const Circle& GetCircle() const { return circle_; }
 	virtual bool IsDead()const;
 	virtual void Update();

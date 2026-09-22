@@ -17,6 +17,11 @@ private:
 	Update_t update_;
 	Draw_t draw_;
 	void AppearUpdate();
+	void SimpleBulletsUpdate();
+	void NWayBulletsUpdate();
+	void RadialBulletsUpdate();
+	void ScatteredBulletsUpdate();
+	void RainyBulletsUpdate();
 	void NormalUpdate();
 	void DyingUpdate();
 	void NormalDraw();

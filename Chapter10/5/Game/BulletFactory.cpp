@@ -1,10 +1,16 @@
 #include "BulletFactory.h"
-
+#include"../ResourceManager.h"
+#include<algorithm>
+#include<DxLib.h>
 BulletFactory::BulletFactory()
-{}
+{
+	handle_ = mylib::LoadTexture(L"img/game/enemy_bullet.png");
+}
 
-void BulletFactory::Create(std::shared_ptr<Actor> actor, const Position2& pos,const Vector2& dir)
-{}
+void BulletFactory::Create(std::shared_ptr<Actor> owner, const Position2& pos,const Vector2& vel)
+{
+	
+}
 
 void BulletFactory::Update()
 {

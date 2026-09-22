@@ -19,11 +19,12 @@ class Actor;
 class BulletFactory
 {
 private:
+	int handle_ = -1;
 	std::list<std::shared_ptr<Bullet>> bullets_;
 public:
 	BulletFactory();
 	std::list<std::shared_ptr<Bullet>>& GetBullets() { return bullets_; }
-	void Create(std::shared_ptr<Actor> actor, const Position2& pos,const Vector2& dir);
+	void Create(std::shared_ptr<Actor> owner, const Position2& pos,const Vector2& vel);
 	void Update();
 	void Draw();
 
