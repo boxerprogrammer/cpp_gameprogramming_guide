@@ -25,6 +25,7 @@ public:
 	BulletFactory();
 	std::list<std::shared_ptr<Bullet>>& GetBullets() { return bullets_; }
 	void Create(std::shared_ptr<Actor> owner, const Position2& pos,const Vector2& vel);
+	void Clear();
 	void Update();
 	void Draw();
 

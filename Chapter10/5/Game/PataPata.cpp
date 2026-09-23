@@ -1,7 +1,9 @@
 #include "PataPata.h"
+#include"BulletFactory.h"
 #include<DxLib.h>
 #include<cmath>
 #include"Player.h"
+#include<memory>
 constexpr int enemy_cut_w = 32;
 constexpr int enemy_cut_h = 16;
 constexpr float enemy_scale = 2.5f;
@@ -9,6 +11,7 @@ constexpr int one_picture_frame = 8;//1つの絵を表示するフレーム
 constexpr int picture_num = 2;//アニメーションに必要な絵の枚数
 constexpr float move_speed = 4.0f;//敵のスピード
 constexpr float back_move_speed = 6.0f;//敵のスピード
+constexpr float bullet_speed = 8.0f;//敵弾のスピード
 
 void PataPata::WaveForwardUpdate()
 {
@@ -67,6 +70,11 @@ void PataPata::ChangeWait()
 	vel_.y = 0;
 	waitFrame_ = 60;
 	update_ = &PataPata::WaitUpdate;
+	//自機狙い弾を発射
+	auto vel = player_->GetPos() - pos_;
+	vel.Normalize();
+	vel *= bullet_speed;
+	bulletFactory_->Create(shared_from_this(), GetPos(), vel);
 }
 
 

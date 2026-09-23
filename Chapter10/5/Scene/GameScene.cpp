@@ -68,8 +68,7 @@ enemy_{ {320,50},10.0f },
 enemyVel_{enemy_speed,0.0f},
 update_(&GameScene::FadeInUpdate),
 draw_(&GameScene::FadeDraw),
-shots_{},
-bullets_{}
+shots_{}
 {
 	for (auto& shot : shots_) {
 		shot.circle.r = 8.0f;
@@ -176,7 +175,7 @@ GameScene::NormalUpdate(Input& input) {
 			effectFactory_->Create(player_->GetPos(), EffectType::bomb_explosion);
 			PlaySoundMem(bombSE_, DX_PLAYTYPE_BACK);
 			//敵弾を全消し
-			//bulletFactory_->Clear();
+			bulletFactory_->Clear();
 			auto& enemis = enemyFactory_->GetEnemies();
 			for (auto& enemy : enemis) {
 				if (enemy->IsDead())continue;
@@ -270,21 +269,20 @@ GameScene::NormalUpdate(Input& input) {
 
 	enemyExplosionFrame_ = std::max(enemyExplosionFrame_ - 1, 0);
 
-	//敵の弾の座標更新
-	for (auto& bullet : bullets_) {
-		if (bullet.isDead)continue;
-		bullet.circle.pos += bullet.vel;
-		if (bullet.circle.pos.x < -32 || bullet.circle.pos.x > 640 + 32 || 
-			bullet.circle.pos.y < -32 || bullet.circle.pos.y >480 + 32) {//弾は画面外に出たら死ぬ
-			bullet.isDead = true;
-			continue;
-		}
-		//敵の弾と自機の当たり判定
-		if (!player_->IsDead()) {
-			if (IsHit(bullet.circle, player_->GetCollision())) {
-				bullet.isDead = true;
+	bulletFactory_->Update();
+	auto& bullets = bulletFactory_->GetBullets();
+
+	if(!player_->IsDead()){
+		for (auto& bullet : bullets) {
+			if (bullet->IsDead())continue;
+			//敵の弾と自機の当たり判定
+			if (IsHit(bullet->GetCircle(), player_->GetCollision())) {
+				bullet->OnHit(*player_);
+				auto efkPos = (bullet->GetPos() + player_->GetPos()) * 0.5f;
+				effectFactory_->Create(efkPos, EffectType::damage);
+				player_->OnHit(*bullet);
 				playerStatus_->LoseLife();
-				//player_->OnHit(bullet);
+				break;
 			}
 		}
 	}
@@ -359,19 +357,7 @@ GameScene::NormalDraw() {
 		}
 	}
 	
-
-
-	//自機爆発表示
-
-
-	//敵弾表示
-	for (auto& bullet : bullets_) {
-		if (bullet.isDead) continue;
-		DrawRectRotaGraphF(bullet.circle.pos.x, bullet.circle.pos.y,
-			bullet_cut_w * shotImgIdx, bullet_cut_h * 0,
-			bullet_cut_w, bullet_cut_h,
-			enemy_scale, 0.0f, shotH_, true);
-	}
+	bulletFactory_->Draw();
 
 
 	//敵爆発表示

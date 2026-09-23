@@ -1,4 +1,5 @@
 #include "PataPata.h"
+#include"BulletFactory.h"
 #include<DxLib.h>
 #include<cmath>
 #include"Player.h"
@@ -46,6 +47,7 @@ void PataPata::WaitUpdate()
 {
 	if (--waitFrame_ <= 0) {
 		ChangeForward();
+		
 	}
 }
 void PataPata::ChangeForward()

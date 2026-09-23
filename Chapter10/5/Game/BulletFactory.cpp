@@ -1,4 +1,5 @@
 #include "BulletFactory.h"
+#include"Bullet.h"
 #include"../ResourceManager.h"
 #include<algorithm>
 #include<DxLib.h>
@@ -9,7 +10,12 @@ BulletFactory::BulletFactory()
 
 void BulletFactory::Create(std::shared_ptr<Actor> owner, const Position2& pos,const Vector2& vel)
 {
-	
+	bullets_.push_back(std::make_shared<Bullet>(owner, handle_,pos, vel));
+}
+
+void BulletFactory::Clear()
+{
+	bullets_.clear();
 }
 
 void BulletFactory::Update()

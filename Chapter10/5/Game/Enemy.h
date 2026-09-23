@@ -11,7 +11,7 @@ class EffectFactory;
 /// <summary>
 /// “GŠî’êƒNƒ‰ƒX
 /// </summary>
-class Enemy : public Actor
+class Enemy : public Actor ,public std::enable_shared_from_this<Enemy>
 {
 protected:
 	Circle circle_;//“–‚½‚è”»’è—p

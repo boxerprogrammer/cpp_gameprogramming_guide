@@ -6,7 +6,7 @@
 /// </summary>
 class Bullet : public Actor
 {
-private:
+protected:
 	std::weak_ptr<Actor> owner_;//’e‚ÌŠ—LÒ(’N‚ªŒ‚‚Á‚½‚©)
 	Circle circle_ = { {},3.0f };//’e‚Ì“–‚½‚è”»’è
 	Vector2 vel_ = {};//’e‚Ì‘¬“x

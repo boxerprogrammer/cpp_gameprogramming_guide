@@ -1,7 +1,7 @@
 #pragma once
 #include "Enemy.h"
 class PataPata :
-    public Enemy
+	public Enemy
 {
 private:
 	int handle_;//‰æ‘œƒnƒ“ƒhƒ‹(Factory‚©‚ç‚à‚ç‚Á‚½‚à‚Ì)

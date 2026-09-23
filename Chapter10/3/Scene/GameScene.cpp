@@ -176,53 +176,6 @@ GameScene::NormalUpdate(Input& input) {
 	}
 	enemyFactory_->Update();
 	effectFactory_->Update();
-	////“G‚Ì“®‚«‚Ì§Œä
-	//enemy_.pos += enemyVel_;
-	//if ((enemyVel_.x > 0.0f && enemy_.pos.x > wsize.w - enemy_cut_w*enemy_scale/2.0f) ||
-	//	(enemyVel_.x < 0.0f && enemy_.pos.x < enemy_cut_w * enemy_scale/2.0f)) {
-	//	enemyVel_.x = -enemyVel_.x;
-	//}
-	//
-	//if (gameFrame_ < 120) {
-	//	if (gameFrame_ % 20 == 0) {//20ƒtƒŒ[ƒ€‚É‚P”­’e‚ðŒ‚‚Â
-	//		for (auto& bullet : bullets_) {
-	//			//“G’e”­ŽË‚Ì‹V
-	//			if (bullet.isDead) {
-	//				bullet.isDead = false;
-	//				bullet.circle.pos = enemy_.pos;
-	//				bullet.vel = (playerCircle_.pos - enemy_.pos).Normalized() * enemy_bullet_speed;//Ž©‹@‘_‚¢’e
-	//				break;
-	//			}
-	//		}
-	//	}
-	//}
-	//else {//n-wayƒVƒ‡ƒbƒg
-	//	if (gameFrame_ % 20 == 0) {//20ƒtƒŒ[ƒ€‚É‚P”­’e‚ðŒ‚‚Â
-	//		//^‚ñ’†‚ÍŽ©‹@‘_‚¢
-	//		//—¼—×‚Í30‹¶‰E‚É•ª‚©‚ê‚Ä‚é‚Æ‚µ‚Ü‚·
-	//		constexpr int way_num = 9;//‰½way‚©
-	//		constexpr float angle_30 = DX_PI_F / 15.0f;
-	//		//‚¢‚Á‚½‚ñŽ©‹@‘_‚¢‚ÌŠp“x‚ðŒvŽZ‚µ‚Ü‚·
-	//		auto vec = playerCircle_.pos - enemy_.pos;//Ž©‹@‘_‚¢ƒxƒNƒgƒ‹
-	//		auto theta = atan2(vec.y, vec.x)- angle_30*(way_num/2);
-	//		int count = 0;
-	//		for (auto& bullet : bullets_) {
-	//			//“G’e”­ŽË‚Ì‹V
-	//			if (bullet.isDead) {
-	//				bullet.isDead = false;
-	//				bullet.circle.pos = enemy_.pos;
-	//				//bullet.vel = (playerPos_ - enemyPos_).Normalized() * enemy_bullet_speed;//Ž©‹@‘_‚¢’e
-	//				bullet.vel = { cos(theta),sin(theta) };
-	//				bullet.vel *= enemy_bullet_speed;
-	//				theta += angle_30;
-	//				++count;
-	//			}
-	//			if (count == way_num) {
-	//				break;
-	//			}
-	//		}
-	//	}
-	//}
 
 	//ƒvƒŒƒCƒ„[’e‚ÌÀ•W‚ÌXV
 	for (auto& shot : shots_) {

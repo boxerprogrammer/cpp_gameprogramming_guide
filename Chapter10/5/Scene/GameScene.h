@@ -43,7 +43,6 @@ private:
 	Circle enemy_= { {0.0f,0.0f},10.0f };//“G‚ÌÀ•W
 	int enemyExplosionFrame_=0;
 	Vector2 enemyVel_;//“G‚Ì‘¬“x
-	Shot bullets_[128];//“G‚Ì’e
 	int shotSE_=0;
 	int explosionSE_ = 0;
 	int bombSE_ = 0;
