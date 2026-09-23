@@ -23,6 +23,7 @@ protected:
 	//BulletFactoryのオブジェクトを内部に持っておく
 	std::shared_ptr<BulletFactory> bulletFactory_;
 	std::shared_ptr<EffectFactory> effectFactory_;
+	void CheckVanish();
 public:
 	/// <summary>
 	/// 敵基底クラスのコンストラクタ

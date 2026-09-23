@@ -92,7 +92,7 @@ void Zako::Update()
 {
 	++frame_;
 	(this->*update_)();
-
+	CheckVanish();
 }
 
 void Zako::Draw()

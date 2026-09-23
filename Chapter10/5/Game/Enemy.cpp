@@ -1,6 +1,17 @@
 #include "Enemy.h"
 #include "Effect.h"
 #include"EffectFactory.h"
+#include"../Application.h"
+constexpr int vanish_margin = 128;
+void Enemy::CheckVanish()
+{
+	const auto& wsize = Application::GetInstance().GetWindowSize();
+		//画面外に出たら弾を削除
+	if ((circle_.pos.x < -vanish_margin) || (circle_.pos.x > wsize.w + vanish_margin) || 
+		(circle_.pos.y < -vanish_margin) || (circle_.pos.y > wsize.h + vanish_margin)) {//弾は画面外に出たら死ぬ
+		isDead_ = true;
+	}
+}
 
 Enemy::Enemy(std::shared_ptr<Player> player,
 	std::shared_ptr<BulletFactory> bf,

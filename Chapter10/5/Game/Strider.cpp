@@ -39,6 +39,7 @@ void Strider::Update()
 			angle += way_angle;
 		}
 	}
+	CheckVanish();
 }
 
 void Strider::Draw()

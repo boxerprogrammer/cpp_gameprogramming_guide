@@ -104,6 +104,7 @@ void PataPata::Update()
 {
 	++frame_;
 	(this->*update_)();
+	CheckVanish();
 }
 
 void PataPata::Draw()
