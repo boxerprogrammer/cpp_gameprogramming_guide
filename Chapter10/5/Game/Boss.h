@@ -15,6 +15,7 @@ private:
 	using Update_t = void (Boss::*)();
 	using Draw_t = void (Boss::*)();
 	Update_t update_;
+	Update_t bulletsUpdate_;
 	Draw_t draw_;
 	void AppearUpdate();
 	void SimpleBulletsUpdate();
