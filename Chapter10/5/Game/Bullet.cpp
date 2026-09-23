@@ -29,6 +29,18 @@ void Bullet::Update()
 
 	pos_ += vel_;
 	circle_.pos = pos_;
+
+	//持ち主が死んでいたら弾も死ぬ
+	if (owner_.expired()) {
+		isDead_ = true;
+		return;
+	}
+
+	if ((circle_.pos.x < -32&&vel_.x < 0) || (circle_.pos.x > wsize.w + 32&&vel_.x > 0) || 
+		(circle_.pos.y < -32&&vel_.y < 0) || (circle_.pos.y > wsize.h + 32&&vel_.y > 0)) {//弾は画面外に出たら死ぬ
+		isDead_ = true;
+	}
+
 }
 
 void Bullet::Draw()
