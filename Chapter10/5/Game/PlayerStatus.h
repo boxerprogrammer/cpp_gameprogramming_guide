@@ -7,7 +7,7 @@ class PlayerStatus
 {
 public:
     // ゲーム開始時の初期値
-    static constexpr int initial_lives = 2;   // 初期残機（自機ストック）
+    static constexpr int initial_lives = 8;   // 初期残機（自機ストック）
     static constexpr int initial_bombs = 3;   // 初期残ボム数
     static constexpr int max_lives     = 8;   // 残機の上限（アイテム取得時に使用）
     static constexpr int max_bombs     = 8;   // 残ボムの上限
