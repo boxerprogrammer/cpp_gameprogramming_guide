@@ -28,18 +28,23 @@ void Strider::Update()
 	pos_.y += 3.0f;
 	circle_.pos = pos_;
 	if(frame_%bullet_interval==0){
-		//3-wayショット
-		auto vel = player_->GetPos()-pos_;
-		float angle = atan2f(vel.y, vel.x);
-		angle -= way_angle;
-		for(int i=0;i<3;++i){
-			vel = { cosf(angle),sinf(angle) };
-			vel *= bullet_speed;
-			bulletFactory_->Create(shared_from_this(), pos_, vel);
-			angle += way_angle;
-		}
+		Shoot3Way();
 	}
 	CheckVanish();
+}
+
+void Strider::Shoot3Way()
+{
+	//3-wayショット
+	auto vel = player_->GetPos() - pos_;
+	float angle = atan2f(vel.y, vel.x);
+	angle -= way_angle;
+	for (int i = 0; i<3; ++i) {
+		vel = { cosf(angle),sinf(angle) };
+		vel *= bullet_speed;
+		bulletFactory_->Create(shared_from_this(), pos_, vel);
+		angle += way_angle;
+	}
 }
 
 void Strider::Draw()

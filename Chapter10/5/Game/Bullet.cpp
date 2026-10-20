@@ -7,11 +7,12 @@ constexpr int img_frame = 4;
 constexpr int img_num = 4;
 constexpr float img_scale = 1.2f;
 
-Bullet::Bullet(std::weak_ptr<Actor> owner, int handle,const Position2& pos, const Vector2& vel): 
+Bullet::Bullet(std::weak_ptr<Actor> owner, int handle,const Position2& pos, const Vector2& vel, const Vector2& acc): 
 	handle_(handle), 
 	owner_(owner), 
 	circle_(pos, 3.0f), 
 	vel_(vel), 
+	acc_(acc),
 	isDead_(false) {
 	pos_ = pos;
 	actorType_ = ActorType::enemy_bullet;
@@ -26,7 +27,7 @@ void Bullet::Update()
 {
 	++frame_;
 	const auto& wsize = Application::GetInstance().GetWindowSize();
-
+	vel_ += acc_;
 	pos_ += vel_;
 	circle_.pos = pos_;
 

@@ -119,6 +119,9 @@ void GameScene::OnEnterBoss()
 void GameScene::OnExitBoss()
 {
 	StopMusic();
+	update_ = &GameScene::FadeOutUpdate;
+	draw_ = &GameScene::FadeDraw;
+	frame_ = 0;
 }
 
 void GameScene::DoHitStop()
@@ -132,6 +135,7 @@ void
 GameScene::FadeInUpdate(Input&) {
 	if (--frame_ <= 0) {
 		PlayMusic(L"../resource/bgm/bgm.wav",DX_PLAYTYPE_LOOP);
+		StopMusic();
 		update_ = &GameScene::NormalUpdate;
 		draw_ = &GameScene::NormalDraw;
 		return;
@@ -179,7 +183,7 @@ GameScene::NormalUpdate(Input& input) {
 			auto& enemis = enemyFactory_->GetEnemies();
 			for (auto& enemy : enemis) {
 				if (enemy->IsDead())continue;
-				enemy->Damage(1000);
+				enemy->Damage(10);
 				if (enemy->IsDead()) {
 					score_->Add(enemy->GetScore());
 				}

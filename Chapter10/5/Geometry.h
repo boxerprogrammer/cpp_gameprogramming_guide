@@ -36,3 +36,5 @@ struct Circle {
 	float r;//”¼Œa
 	void Draw();
 };
+
+float DegreeToRadian(float degree);

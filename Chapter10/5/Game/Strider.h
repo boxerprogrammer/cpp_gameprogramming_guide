@@ -22,6 +22,7 @@ public:
 	/// 雑魚の座標等更新
 	/// </summary>
 	void Update()override;
+	void Shoot3Way();
 	/// <summary>
 	/// 雑魚の表示
 	/// </summary>

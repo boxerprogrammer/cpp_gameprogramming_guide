@@ -34,7 +34,9 @@ public:
 	/// <param name="owner">’e‚ÌŠ—LÒ</param>
 	/// <param name="pos">’e‚Ì‰ŠúˆÊ’u</param>
 	/// <param name="vel">’e‚Ì‰Šú‘¬“x</param>
+	/// <param name="acc">’e‚Ì‰Šú‰Á‘¬“x</param>
 	void Create(std::shared_ptr<Actor> owner, const Position2& pos,const Vector2& vel);
+	void Create(std::shared_ptr<Actor> owner, const Position2& pos,const Vector2& vel, const Vector2& acc);
 	/// <summary>
 	/// ’e‚ğ‘S‚Äíœ‚·‚é
 	/// </summary>

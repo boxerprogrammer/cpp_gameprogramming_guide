@@ -12,6 +12,10 @@ void BulletFactory::Create(std::shared_ptr<Actor> owner, const Position2& pos,co
 {
 	bullets_.push_back(std::make_shared<Bullet>(owner, handle_,pos, vel));
 }
+void BulletFactory::Create(std::shared_ptr<Actor> owner, const Position2& pos,const Vector2& vel, const Vector2& acc)
+{
+	bullets_.push_back(std::make_shared<Bullet>(owner, handle_,pos, vel, acc));
+}
 
 void BulletFactory::Clear()
 {

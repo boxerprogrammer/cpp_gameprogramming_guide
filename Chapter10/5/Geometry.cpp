@@ -78,3 +78,8 @@ Vector2 Vector2::operator*(float scale) const
 			y * scale 
 			};
 }
+
+float DegreeToRadian(float degree)
+{
+	return degree * DX_PI_F / 180.0f;
+}
