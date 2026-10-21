@@ -34,7 +34,7 @@ private:
 		Vector2 vel;//弾の速度
 		bool isDead=true;//無効になってる
 	};
-	Shot shots_[32];//プレイヤーの弾
+	Shot shots_[80];//プレイヤーの弾
 
 	//イベント系
 	int scrollStopTimer_ = 0;

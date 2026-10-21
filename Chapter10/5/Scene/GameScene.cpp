@@ -45,6 +45,9 @@ constexpr int top_chip_index = 15;
 
 constexpr int cell_size = 32;
 
+constexpr float player_shot_speed = 8.0f;
+constexpr float player_nway_angle = DX_PI_F / 6.0f;
+
 /// <summary>
 /// ２つの円が交差しているかどうかを返す
 /// </summary>
@@ -162,16 +165,7 @@ GameScene::NormalUpdate(Input& input) {
 
 	//プレイヤーの弾の制御
 	if (input.IsTriggered("shot")) {
-		for (auto& shot : shots_) {
-			//弾発射の儀
-			if (shot.isDead) {
-				shot.isDead = false;//弾を復活
-				shot.circle.pos = player_->GetPos();//弾の開始地点
-				shot.vel = { 0.0f,-8.0f };//弾の速度
-				PlaySoundMem(shotSE_, DX_PLAYTYPE_BACK);
-				break;
-			}
-		}
+		ShootPlayerBullets();
 	}
 	if (input.IsTriggered("bomb")) {
 		if (playerStatus_->GetBombsCount() > 0) {
@@ -299,6 +293,60 @@ GameScene::NormalUpdate(Input& input) {
 				enemy->OnHit(*player_);
 				break;
 			}
+		}
+	}
+}
+void GameScene::ShootPlayerBullets()
+{
+	int count = 0;
+	constexpr float regular_angle = -DX_PI_F / 2.0f;
+	float angle = regular_angle - player_nway_angle;
+	for (auto& shot : shots_) {
+		//弾発射の儀
+		if (shot.isDead) {
+			shot.isDead = false;//弾を復活
+			shot.circle.pos = player_->GetPos();//弾の開始地点
+			if (score_->GetCurrent() < 500) {//シングルショット
+				shot.vel = { 0.0f,-player_shot_speed };//弾の速度
+				PlaySoundMem(shotSE_, DX_PLAYTYPE_BACK);
+				break;
+			}
+			else if (score_->GetCurrent() < 1500) {//ダブルショット
+				shot.vel = { 0.0f,-player_shot_speed };//弾の速度
+				shot.circle.pos.x = shot.circle.pos.x - 8.0f + 16.0f * count;//弾の位置を少しずらす
+				shot.isDead = false;
+				if (++count == 2) {
+					PlaySoundMem(shotSE_, DX_PLAYTYPE_BACK);
+					break;
+				}
+			}
+			else if (score_->GetCurrent() < 3000) {//3-wayショット
+				//3-wayショット
+				Vector2 vel = { cosf(angle),sinf(angle) };
+				vel *= player_shot_speed;
+				shot.isDead = false;
+				shot.circle.pos = player_->GetPos();
+				shot.vel = vel;
+				if (++count == 3) {
+					PlaySoundMem(shotSE_, DX_PLAYTYPE_BACK);
+					break;
+				}
+				angle += player_nway_angle;
+			}
+			else {
+				//5-wayショット
+				Vector2 vel = { cosf(angle),sinf(angle) };
+				vel *= player_shot_speed;
+				shot.isDead = false;
+				shot.circle.pos = player_->GetPos();
+				shot.vel = vel;
+				if (++count == 5) {
+					PlaySoundMem(shotSE_, DX_PLAYTYPE_BACK);
+					break;
+				}
+				angle += player_nway_angle * 0.5f;
+			}
+
 		}
 	}
 }

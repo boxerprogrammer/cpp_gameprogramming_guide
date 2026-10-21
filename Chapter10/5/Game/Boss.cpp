@@ -67,7 +67,7 @@ void Boss::RadialBulletsUpdate()
 	MovePosition();
 	auto startLife = max_life - change_pattern_life * 3;
 	//円形弾幕(放射状に弾を吐き出す)
-	float rad = DegreeToRadian(static_cast<float>(++frame_));
+	float rad = DegreeToRadian(static_cast<float>(frame_));
 	if(++frame_ % boss_bullet_interval == 0){
 		ShootRadialBullets(8 + (startLife - life_) / 2, rad);
 	}
@@ -217,6 +217,7 @@ void Boss::Draw()
 
 void Boss::OnHit(const Actor& actor)
 {
+	if(life_<=0)return;
 	if (--life_ <= 0) {
 		update_ = &Boss::DyingUpdate;
 		draw_ = &Boss::DyingDraw;
@@ -226,6 +227,7 @@ void Boss::OnHit(const Actor& actor)
 
 void Boss::Damage(int damage)
 {
+	if(life_<=0)return;
 	life_ -= damage;
 	if (life_ <= 0) {
 		update_ = &Boss::DyingUpdate;
