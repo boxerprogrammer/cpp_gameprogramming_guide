@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="1/SideScrollShmup1.vcxproj" Id="6d56a418-aa99-447f-87ff-1b4f16c0999b" />
+  <Project Path="2/SideScrollShmup2.vcxproj" />
+</Solution>
