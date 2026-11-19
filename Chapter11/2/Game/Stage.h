@@ -9,6 +9,7 @@ enum class LayerType {
 	enemy,//敵データ
 };
 class Actor;
+class Collision;
 /// <summary>
 /// ステージデータクラス
 /// </summary>
@@ -69,6 +70,7 @@ public:
 	/// <param name="offset">ずらして判定したいオフセットベクトル</param>
 	/// <returns>当たってるかどうか</returns>
 	bool IsHitTerrain(std::shared_ptr<Actor> actor, const Vector2& offset = {})const;
+	bool IsHitTerrain(std::shared_ptr<Actor> actor, std::shared_ptr<Collision>& terrainCol, const Vector2& offset = {})const;
 
 	/// <summary>
 	/// 背景とアクターを当たり判定し、当たっていればブロックする

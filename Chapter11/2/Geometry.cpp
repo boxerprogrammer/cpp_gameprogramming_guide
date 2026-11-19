@@ -72,6 +72,16 @@ void Vector2::operator/=(float div)
 	y /= div;
 }
 
+Vector2 GetProjectionVector(const Vector2& vec, const Vector2& axis)
+{
+	return vec.Normalized() * Dot(vec, axis.Normalized());
+}
+
+Vector2 GetReflectionVector(const Vector2& vec, const Vector2& normal)
+{
+	return vec - normal * 2.0f * Dot(vec, normal);
+}
+
 Vector2 operator+(const Vector2& left, const Vector2& right)
 {
 	return {left.x+right.x,

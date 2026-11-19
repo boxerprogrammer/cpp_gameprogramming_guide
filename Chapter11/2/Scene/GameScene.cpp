@@ -175,8 +175,9 @@ void GameScene::NormalUpdate(Input& input)
 	}
 	for (auto& shot : shots) {
 		if (shot->IsDead())continue;
-		if (stage_->IsHitTerrain(shot)) {
-			shot->OnHit(std::shared_ptr<Actor>());
+		std::shared_ptr<Collision> terrainCol;
+		if (stage_->IsHitTerrain(shot, terrainCol)) {
+			shot->OnHit(terrainCol);
 		}
 	}
 	
@@ -270,7 +271,7 @@ GameScene::GameScene(SceneController& ctrl):Scene(ctrl)
 
 GameScene::~GameScene()
 {
-	Application::GetInstance().GetLoader()->DeleteTemporalAssets();
+	Application::GetInstance().GetLoader()->DeleteTemporaryAssets();
 
 }
 
@@ -292,4 +293,9 @@ const std::shared_ptr<Stage> GameScene::GetStage() const
 const std::shared_ptr<EnemyFactory> GameScene::GetEnemyFactory() const
 {
 	return enemyFactory_;
+}
+
+const std::shared_ptr<ShotFactory> GameScene::GetShotFactory() const
+{
+	return shotFactory_;
 }

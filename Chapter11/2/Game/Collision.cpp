@@ -131,6 +131,7 @@ bool IsHit(const std::shared_ptr<Collision> colA, const std::shared_ptr<Collisio
 	if (colA->GetType() == CollisionType::capsule && colB->GetType() == CollisionType::circle) {
 		return IsHit(colA->GetCapsule(), colB->GetCircle(),offsetA,offsetB);
 	}
+	return false;
 }
 
 Vector2 GetOverlap(const std::shared_ptr<Collision> colA, const std::shared_ptr<Collision> colB)
@@ -151,4 +152,17 @@ bool IsOutScreen(const Position2& pos)
 			wsize.h + out_screen_margin < pos.y || //下の画面外
 			pos.y < 0 - out_screen_margin; //上の画面外
 	
+}
+
+float GetIntersectionDistance(const Vector2& pos, const Vector2& line, const Circle& circle, Vector2& normal)
+{
+	auto vec = circle.pos - pos;
+	auto projVec = GetProjectionVector(vec, line);//射影ベクトル
+	auto verticalVec = vec - projVec;//垂線ベクトル
+	auto verticalLen = verticalVec.Length();
+	auto distance = projVec.Length()-sqrtf(circle.radius * circle.radius - verticalLen * verticalLen);
+
+	normal = line.Normalized() * distance - vec;
+	normal.Normalize();//円の法線ベクトルを求める
+	return distance;
 }

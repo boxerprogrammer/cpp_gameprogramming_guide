@@ -64,7 +64,7 @@ int FileLoader::LoadSound(const std::wstring& localPath, AssetType type)
 	return h;
 }
 
-void FileLoader::DeleteTemporalAssets()
+void FileLoader::DeleteTemporaryAssets()
 {
 	std::erase_if(assets_,
 					[](const auto& asset) {

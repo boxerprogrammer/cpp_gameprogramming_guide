@@ -57,5 +57,6 @@ public:
 	void Draw()override;
 	const std::shared_ptr<Stage> GetStage()const;
 	const std::shared_ptr<EnemyFactory> GetEnemyFactory()const;
+	const std::shared_ptr<ShotFactory> GetShotFactory()const;
 };
 

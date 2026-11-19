@@ -152,7 +152,8 @@ void GameScene::NormalUpdate(Input& input)
 	for (auto& shot : shots_) {
 		if (shot->IsDead())continue;
 		if (stage_->IsHitTerrain(shot)) {
-			shot->OnHit(std::shared_ptr<Actor>());
+			//shot->OnHit(std::shared_ptr<Actor>());
+			shot->OnHit();
 		}
 	}
 	
@@ -230,7 +231,7 @@ GameScene::GameScene(SceneController& ctrl):Scene(ctrl)
 
 GameScene::~GameScene()
 {
-	Application::GetInstance().GetLoader()->DeleteTemporalAssets();
+	Application::GetInstance().GetLoader()->DeleteTemporaryAssets();
 
 }
 

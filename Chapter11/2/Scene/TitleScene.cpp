@@ -84,7 +84,7 @@ TitleScene::TitleScene(SceneController& ctrl):Scene(ctrl)
 TitleScene::~TitleScene()
 {
 	auto loader = Application::GetInstance().GetLoader();
-	loader->DeleteTemporalAssets();
+	loader->DeleteTemporaryAssets();
 }
 
 void TitleScene::Update(Input& input)

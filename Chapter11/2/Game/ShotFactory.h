@@ -12,6 +12,7 @@ enum class ShotType {
 	charge,//溜めショット
 	missile,//ホーミング弾
 	reflect_laser,//反射レーザー
+	re_reflect_laser,//反射された反射レーザー
 };
 /// <summary>
 /// 自機のショットを生成・管理する
@@ -21,7 +22,7 @@ class ShotFactory
 private:
 	std::vector<int> shotImgs_;
 
-	using CreateFunc_t = std::function<std::shared_ptr<Shot>(int,const Position2&)>;
+	using CreateFunc_t = std::function<std::shared_ptr<Shot>(int,const Position2&,const Vector2&)>;
 	std::vector<CreateFunc_t> createFuncs_;
 
 	using Shots_t = std::list<std::shared_ptr<Shot>>;
@@ -38,7 +39,7 @@ public:
 	/// </summary>
 	/// <param name="pos">発生座標</param>
 	/// <param name="shotType">弾タイプ</param>
-	void Fire(const Position2& pos,ShotType shotType);
+	void Fire(const Position2& pos,ShotType shotType,Vector2 vec={});
 	/// <summary>
 	/// 自分が持ってるショットのリストを返す
 	/// </summary>

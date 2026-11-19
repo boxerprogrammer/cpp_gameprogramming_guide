@@ -26,6 +26,7 @@ public:
 	virtual void Update()=0;//座標等の更新
 	virtual void Draw() = 0;//描画
 	virtual void OnHit(const std::shared_ptr<Actor> actor) = 0;
+	virtual void OnHit(const std::shared_ptr<Collision> collision){};
 	ActorType GetActorType()const;
 	void SetPosition(const Position2& pos);
 	void CollisionSet();

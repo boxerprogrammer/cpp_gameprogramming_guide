@@ -50,3 +50,5 @@ Vector2 GetOverlap(const std::shared_ptr < Collision> colA,
 /// <param name="pos">現在の座標</param>
 /// <returns>画面外に出てたらtrue,画面内ならfalse</returns>
 bool IsOutScreen(const Position2& pos);
+
+float GetIntersectionDistance(const Vector2& pos, const Vector2& line, const Circle& circle,Vector2& normal);

@@ -17,7 +17,7 @@ class FileLoader
 	class Asset {
 		friend FileLoader;
 	private:
-		AssetType type=AssetType::continuous;
+		AssetType type=AssetType::temporary;
 		FileType fileType=FileType::graphic;
 		int handle=-1;
 	public:
@@ -32,7 +32,7 @@ public:
 	/// <param name="path">ファイルパス</param>
 	/// <param name="type">常駐か一時的か(一時的ならtemporaryを選択)</param>
 	/// <returns>ハンドル</returns>
-	int LoadGraph(const std::wstring& path,AssetType type=AssetType::continuous);
+	int LoadGraph(const std::wstring& path,AssetType type=AssetType::temporary);
 
 	/// <summary>
 	/// サウンドをロード
@@ -40,12 +40,12 @@ public:
 	/// <param name="path">ファイルパス</param>
 	/// <param name="type">常駐か一時的か(一時的ならtemporaryを選択)</param>
 	/// <returns>ハンドル</returns>
-	int LoadSound(const std::wstring& path,AssetType type = AssetType::continuous);
+	int LoadSound(const std::wstring& path,AssetType type = AssetType::temporary);
 	
 	/// <summary>
 	/// 一時アセット(temporary)のみを削除する
 	/// </summary>
-	void DeleteTemporalAssets();
+	void DeleteTemporaryAssets();
 
 };
 

@@ -178,7 +178,13 @@ int Stage::GetChipWidth() const
 //地形との当たり判定
 bool Stage::IsHitTerrain(std::shared_ptr<Actor> actor, const Vector2& offset) const
 {
-	//画面サイズの取得
+	std::shared_ptr<Collision> terrainCol;
+	return IsHitTerrain(actor, terrainCol, offset);
+}
+
+bool Stage::IsHitTerrain(std::shared_ptr<Actor> actor, std::shared_ptr<Collision>& terrainCol, const Vector2& offset) const
+{
+		//画面サイズの取得
 	const auto& wsize = Application::GetInstance().GetWindowSize();
 	//チップ全体の高さ
 	const int stageHeight = mapSize_.h * chip_height * img_scale;
@@ -212,15 +218,14 @@ bool Stage::IsHitTerrain(std::shared_ptr<Actor> actor, const Vector2& offset) co
 			chipPos.y -= adjustHeight;
 			//ステージのブロックはアクター扱いにしていないため、アクターなしのコリジョンオブジェクトを
 			//一時的に生成して、当たり判定を行う
-			auto terrainCol = std::make_shared<Collision>( chipPos,chip_width/2 );
-			if (IsHit(actor->GetCollision(), terrainCol,offset)) {
+			terrainCol = std::make_shared<Collision>( chipPos,chip_width/2 );
+			if (IsHit(actor->GetCollision(), terrainCol)) {
 				return true;
 			}
 		}
 	}
 	return false;
 }
-
 bool Stage::BlockTerrain(std::shared_ptr<Actor> actor, const Vector2& offset) const
 {
 	//画面サイズの取得

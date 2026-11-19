@@ -45,6 +45,16 @@ struct Vector2 {
 /// <returns>内積の結果</returns>
 float Dot(const Vector2& lvec, const Vector2& rvec);
 
+/// <summary>
+/// 射影ベクトルを返す
+/// </summary>
+/// <param name="vec">ベクトルA</param>
+/// <param name="axis">射影される側のベクトル</param>
+/// <returns>射影ベクトル</returns>
+Vector2 GetProjectionVector(const Vector2& vec, const Vector2& axis);
+
+Vector2 GetReflectionVector(const Vector2& vec, const Vector2& normal);
+
 //説明用に、敢えて非メンバ関数として作っています
 Vector2 operator+(const Vector2& left, const Vector2& right);
 

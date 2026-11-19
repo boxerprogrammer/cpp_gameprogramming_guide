@@ -45,7 +45,7 @@ public:
 	/// <summary>
 	/// 一時アセット(temporary)のみを削除する
 	/// </summary>
-	void DeleteTemporalAssets();
+	void DeleteTemporaryAssets();
 
 };
 
